@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scrapy抓取界面</title>
+</head>
+<body>
+    <h1>
+        <button type="button" onclick="longyi_tjzq()">龙一医药网-特价专区</button>
+    </h1>
+    <h2>
+        <button type="button" onclick="alert('欢迎!')">点我!</button>
+    </h2>
+    <h3>
+        <button onclick="myFunction('Harry Potter','Wizard')">点击这里</button>
+    </h3>
+    <form action="/start/" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="启动爬虫">
+</form>
+</body>
+<script>
+    var cmd = new ActiveXObject("WScript.Shell");
+    function longyi_tjzq(){
+    cmd.run("cmd.exe /k cd F:/");
+    cmd.run("cmd.exe /k cd F:/pyhcarm/ScrapyPage/ScrapyPage");
+    cmd.run("cmd.exe /k scrapy crawl longyi_tjzq -o test0407.csv -s FEED_EXPORT_ENCODING=UTF-8");
+    }
+    function myFunction(name,job){
+    alert("Welcome " + name + ", the " + job);
+}
+</script>
+</html>

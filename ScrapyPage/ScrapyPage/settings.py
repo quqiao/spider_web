@@ -72,7 +72,9 @@ COOKIES = [
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'ScrapyPage.pipelines.ScrapypagePipeline': 300,
+    # 'ScrapyPage.pipelines.ScrapypagePipeline': 300,
+    'ScrapyPage.pipelines.MysqlPipelineLongyi': 300,
+
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

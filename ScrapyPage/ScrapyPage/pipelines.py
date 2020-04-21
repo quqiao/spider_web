@@ -70,7 +70,7 @@ class ScrapypagePipeline(object):
 
 
 
-class MysqlPipelineLongyi(object):
+class MysqlPipelineLongyi_tjzq(object):
     """
     同步操作
     """
@@ -80,9 +80,10 @@ class MysqlPipelineLongyi(object):
         self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
         # 创建游标
         self.cursor = self.conn.cursor()
-        self.cursor.execute("DROP TABLE IF EXISTS longyi_tjzq")
+        self.cursor.execute("DROP TABLE IF EXISTS longyi_tjzq_01")
         # 使用预处理语句创建表
         sql = """CREATE TABLE longyi_tjzq_01 (
+                 ID    int unsigned not null  auto_increment primary key,
                  name  CHAR(20) NOT NULL,
                  cj  CHAR(40) NOT NULL,
                  gg CHAR(20) NOT NULL,
@@ -93,6 +94,43 @@ class MysqlPipelineLongyi(object):
     def process_item(self, item, spider):
 
         insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
+                                         item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
+class MysqlPipelinerjyiyao_xpsj(object):
+    """
+    同步操作
+    """
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS rjyiyao_xpsj")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE rjyiyao_xpsj (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  CHAR(100) NOT NULL,
+                 cj  CHAR(100) NOT NULL,
+                 gg CHAR(100) NOT NULL,
+                 xq CHAR(100) NOT NULL,
+                 price CHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into rjyiyao_xpsj (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
         """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],

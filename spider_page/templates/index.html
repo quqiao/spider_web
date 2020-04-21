@@ -5,9 +5,21 @@
     <title>爬取</title>
 </head>
 <body>
-    <form action="/start/" method="POST">
+        <form action="/start_longyi_tjzq/" method="POST">
         {% csrf_token %}
-        <input type="submit" value="启动爬虫">
-    </form>
+            <input type="submit" value="爬取龙一医药网_特价专区">
+        </form>
+        <a href="./longyi_tjzq">
+            <button>获取龙一医药网数据</button>
+        </a>
+        <p>#########################</p>
+        <form action="/start_rjyiyao_xpsj/" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="爬取蓉锦医药网_新品上架">
+        </form>
+        <a href="./rjyiyao_xpsj">
+        <button>获取蓉锦医药网_新品上架数据</button>
+        </a>
+
 </body>
 </html>

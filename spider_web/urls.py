@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from spider_page import views
-from spider_web import longyi_tjzq_db
+from . import longyi_tjzq_db
 
 urlpatterns = [
     url('^$', views.index),
     url('^page$', views.page),
-    url('^', views.start),
-    url(r'^slec_all$', longyi_tjzq_db.slec_all)
+    # url(r'^longyi_tjzq$', longyi_tjzq_db.slec_all),
+    # url(r'^longyi_tjzq/', views.longyi_tjzq),
+    url(r'^rjyiyao_xpsj/', views.rjyiyao_xpsj),
+    # url('^', views.start_longyi_tjzq),
+    url('^', views.start_rjyiyao_xpsj),
+
 ]

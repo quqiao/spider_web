@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蓉锦医药网-新品上架</title>
+</head>
+<body>
+<table class="table2excel">
+
+    <thead>
+    <tr>
+        <th>药名</th>
+        <th>厂家</th>
+        <th>规格</th>
+        <th>效期</th>
+        <th>价格</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users%}
+    <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.cj}}</td>
+        <td>{{user.gg}}</td>
+        <td>{{user.xq}}</td>
+        <td>{{user.price}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script type="text/javascript" src="../js/jquery.table2excel.js">
+    function table2Excel(filename){
+            $(".table2excel").table2excel({
+                    exclude: ".noExl",//class="noExl"的列不导出
+                    name: "Excel Document Name",
+                    filename: filename,//文件名称
+                    fileext: ".xls",//文件后缀名
+                    exclude_img: true,//导出图片
+                    exclude_links: true,//导出超链接
+                    exclude_inputs: true//导出输入框内容
+                    });
+                    }
+</script>
+<input type="button" value="导出到excel中" class="btn btn-primary" onclick="table2Excel('longyi_tjzq.xls')"/>
+</body>
+</html>

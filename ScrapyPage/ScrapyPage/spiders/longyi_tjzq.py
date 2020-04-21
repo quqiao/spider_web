@@ -11,7 +11,7 @@ class longyiSpider(scrapy.Spider):
     name = 'longyi_tjzq'
     allowed_domains = ['www.longyiyy.com']
     start_urls = ['http://www.longyiyy.com/events-534.html']
-    custom_settings = {'ITEM_PIPELINE': {'ScrapyPage.pipelines.MysqlPipelineLongyi': 200}}
+    custom_settings = {'ITEM_PIPELINE': {'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 200}}
 
 
     # def parse(self, response):
@@ -36,7 +36,7 @@ class longyiSpider(scrapy.Spider):
 
     def parse(self, response):
         # print(response.text)
-        for i in range(1, 4):
+        for i in range(1, 9):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()

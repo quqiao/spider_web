@@ -193,6 +193,7 @@ class Login_page(object):
             spider.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div[3]/div[2]/a[2]/img').click()  # 新品上架
             windows = spider.driver.window_handles
             spider.driver.switch_to.window(windows[1])  # 切换到第二页
+            time.sleep(5)
             spider.cookies = spider.driver.get_cookies()
             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
                                 body=spider.driver.page_source,  # html源码

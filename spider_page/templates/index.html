@@ -5,20 +5,28 @@
     <title>爬取</title>
 </head>
 <body>
-        <form action="/start_longyi_tjzq/" method="POST">
+        <form action="{% url 'reg2' %}" method="POST">
         {% csrf_token %}
             <input type="submit" value="爬取龙一医药网_特价专区">
         </form>
-        <a href="./longyi_tjzq">
+        <a href="./longyi_tjzq/">
             <button>获取龙一医药网数据</button>
         </a>
         <p>#########################</p>
-        <form action="/start_rjyiyao_xpsj/" method="POST">
+        <form action="{% url 'reg1' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取蓉锦医药网_新品上架">
         </form>
-        <a href="./rjyiyao_xpsj">
-        <button>获取蓉锦医药网_新品上架数据</button>
+        <a href="./rjyiyao_xpsj/">
+            <button>获取蓉锦医药网_新品上架数据</button>
+        </a>
+        <p>#########################</p>
+        <form action="{% url 'reg3' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="爬取金仁药淘齐_诊所专区" onclick="alert(待续)">
+        </form>
+        <a href="./scjrm_zszq/">
+            <button onclick="alert('待续')">获取金仁药淘齐_诊所专区数据</button>
         </a>
 
 </body>

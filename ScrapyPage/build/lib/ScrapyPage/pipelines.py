@@ -9,9 +9,9 @@ import pymysql
 from twisted.enterprise import adbapi
 import time
 
-class ScrapypagePipeline(object):
-    def process_item(self, item, spider):
-        return item
+# class ScrapypagePipeline(object):
+#     def process_item(self, item, spider):
+#         return item
 
 # class MysqlPipeline_Longyi_tjzq(object):
 #     def __init__(self, dbpool):
@@ -135,6 +135,40 @@ class MysqlPipelinerjyiyao_xpsj(object):
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
                                          item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
+class MysqlPipelinescjrm_zszq(object):
+    """
+    同步操作
+    """
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS scjrm_zszq")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE scjrm_zszq (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  CHAR(100) NOT NULL,
+                 cj  CHAR(100) NOT NULL,
+                 price CHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into scjrm_zszq (name,cj,price) VALUES(%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['price']))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item

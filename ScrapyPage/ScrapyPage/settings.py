@@ -51,9 +51,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'ScrapyPage.middlewares.ScrapypageSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+   'ScrapyPage.middlewares.ScrapypageSpiderMiddleware': 543,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -71,12 +71,12 @@ COOKIES = [
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'ScrapyPage.pipelines.ScrapypagePipeline': 300,
-    'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,
-    'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300,
-
-}
+# ITEM_PIPELINES = {
+#     # 'ScrapyPage.pipelines.ScrapypagePipeline': 300,
+#     'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,
+#     'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300,
+#
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html

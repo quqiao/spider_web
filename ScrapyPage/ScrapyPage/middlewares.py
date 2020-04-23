@@ -108,7 +108,7 @@ class ScrapypageDownloaderMiddleware(object):
 
 class Login_page(object):
     # type()元类，object 基类
-    def process_request(self, request, spider):
+    def process_request(self,  request, spider):
         chrome_options = Options()
         chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
         chrome_options.add_argument('--disable-gpu')
@@ -170,8 +170,9 @@ class Login_page(object):
             password.send_keys('123456')
             #模拟点击“登录”按钮
             spider.driver.find_element_by_class_name('loginBtn').click()
-            time.sleep(3)
-            spider.driver.find_element_by_link_text('院线专区').click()
+            time.sleep(1)
+            spider.driver.get('https://www.scjuchuang.com/goods?attr=1&page=1')
+            # spider.driver.find_element_by_link_text('院线专区').click()
             spider.cookies = spider.driver.get_cookies()
             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
                                 body=spider.driver.page_source,  # html源码
@@ -191,10 +192,36 @@ class Login_page(object):
             password.send_keys('123456')
             #模拟点击“登录”按钮
             spider.driver.find_element_by_id('btnLogin').click()
+            time.sleep(1)
+            # spider.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div[3]/div[2]/a[2]/img').click()  # 新品上架
+            # windows = spider.driver.window_handles
+            # spider.driver.switch_to.window(windows[1])  # 切换到第二页
+            spider.driver.get('http://new.rjyiyao.com/web/product/group/5?page=1')
+            time.sleep(5)
+            spider.cookies = spider.driver.get_cookies()
+            return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+                                body=spider.driver.page_source,  # html源码
+                                encoding='utf-8')
+
+        elif spider.name == 'rjyiyao_zkzq':
+            # 判断是否是登陆
+            # if request.url.find('login') != -1:
+            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe", chrome_options=chrome_options)
+            spider.driver.get('http://new.rjyiyao.com/web/login')
+            # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
+            time.sleep(1)
+            #模拟输入账号密码
+            username = spider.driver.find_element_by_id('username')
+            password = spider.driver.find_element_by_id('password')
+            username.send_keys('18030535053')
+            password.send_keys('123456')
+            #模拟点击“登录”按钮
+            spider.driver.find_element_by_id('btnLogin').click()
             time.sleep(2)
-            spider.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div[3]/div[2]/a[2]/img').click()  # 新品上架
-            windows = spider.driver.window_handles
-            spider.driver.switch_to.window(windows[1])  # 切换到第二页
+            spider.driver.get('http://new.rjyiyao.com/web/product/sale/3?page=1')
+            # spider.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div[3]/div[2]/a[2]/img').click()  # 新品上架
+            # windows = spider.driver.window_handles
+            # spider.driver.switch_to.window(windows[1])  # 切换到第二页
             time.sleep(5)
             spider.cookies = spider.driver.get_cookies()
             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
@@ -214,12 +241,14 @@ class Login_page(object):
             password.send_keys('123456')
             #模拟点击“登录”按钮
             spider.driver.find_element_by_id('userLogin').click()
-            time.sleep(2)
-            spider.driver.find_element_by_link_text('普药专区').click()  # 普药专区
-            time.sleep(5)
+            time.sleep(1)
+            spider.cookies = spider.driver.get_cookies()
+            spider.driver.get('http://www.sckxyy.com/Drug_zone.html#Monday-bg-two')
+            # spider.driver.find_element_by_link_text('普药专区').click()  # 普药专区
+            # time.sleep(5)
             # windows = spider.driver.window_handles
             # spider.driver.switch_to.window(windows[1])  # 切换到第二页
-            spider.cookies = spider.driver.get_cookies()
+
             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
                                 body=spider.driver.page_source,  # html源码
                                 encoding='utf-8')

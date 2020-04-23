@@ -17,6 +17,10 @@ class rjyiyaoSpider(scrapy.Spider):
     #     super().__init__()
     #     driver = None  # 实例selenium
     #     cookies = None  # 用来保存cookie
+    def parse_page(self, response):
+        # 为了验证登陆成功，查看药品专区主页
+        request = scrapy.Request(url='http://new.rjyiyao.com/web/product/group/5', callback=self.parse, dont_filter=True)
+        yield request
 
     def parse(self, response):
         for i in range(1, 5):
@@ -33,10 +37,10 @@ class rjyiyaoSpider(scrapy.Spider):
             item['xq'] = xq
             item['price'] = price
             yield item
-        # next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
-        # if next_page is not None:
-        #     next_page = response.urljoin(next_page)
-        #     yield scrapy.Request(next_page, callback=self.parse)
+        next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
 
     # # 方式一：注意execute的参数类型为一个列表
     # cmdline.execute('scrapy crawl spidername'.split())

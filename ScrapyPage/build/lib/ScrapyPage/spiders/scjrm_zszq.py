@@ -33,10 +33,10 @@ class scjrm_zszqSpider(scrapy.Spider):
             item['cj'] = cj
             item['price'] = price
             yield item
-        # next_page = response.xpath('/html/body/div[2]/div[2]/div[2]/span[12]/a/@href').extract_first()
-        # if next_page is not None:
-        #     next_page = response.urljoin(next_page)
-        # yield scrapy.Request(url=next_page, callback=self.parse, dont_filter=True)
+        next_page = response.xpath('/html/body/div[2]/div[2]/div[2]/span[12]/a/@href').extract_first()
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(url=next_page, callback=self.parse, dont_filter=True)
 
     # # 方式一：注意execute的参数类型为一个列表
     # cmdline.execute('scrapy crawl spidername'.split())

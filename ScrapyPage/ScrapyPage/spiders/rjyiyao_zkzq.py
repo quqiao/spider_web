@@ -8,22 +8,18 @@ from scrapy.http import HtmlResponse
 
 
 class rjyiyaoSpider(scrapy.Spider):
-    name = 'rjyiyao_xpsj'
+    name = 'rjyiyao_zkzq'
     allowed_domains = ['rjyiyao']
-    start_urls = ['http://new.rjyiyao.com/web/product/group/5']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
+    start_urls = ['http://new.rjyiyao.com/web/product/sale/3?page=1']
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
 
     # def __init__(self):
     #     super().__init__()
     #     driver = None  # 实例selenium
     #     cookies = None  # 用来保存cookie
-    def parse_page(self, response):
-        # 为了验证登陆成功，查看药品专区主页
-        request = scrapy.Request(url='http://new.rjyiyao.com/web/product/group/5', callback=self.parse, dont_filter=True)
-        yield request
 
     def parse(self, response):
-        for i in range(1, 5):
+        for i in range(1, 41):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="pageContent"]/div/div[%d]/h1/text()' % i).extract()
@@ -37,10 +33,10 @@ class rjyiyaoSpider(scrapy.Spider):
             item['xq'] = xq
             item['price'] = price
             yield item
-        next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
-        if next_page is not None:
-            next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
+        # next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
+        # if next_page is not None:
+        #     next_page = response.urljoin(next_page)
+        #     yield scrapy.Request(next_page, callback=self.parse)
 
     # # 方式一：注意execute的参数类型为一个列表
     # cmdline.execute('scrapy crawl spidername'.split())

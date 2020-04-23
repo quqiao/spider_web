@@ -36,8 +36,8 @@ class longyiSpider(scrapy.Spider):
 
     def parse(self, response):
         # print(response.text)
-        for i in range(1, 9):
-            time.sleep(1)
+        for i in range(1, 15):
+            # time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()
             cj = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[2]/text()' % i).extract()

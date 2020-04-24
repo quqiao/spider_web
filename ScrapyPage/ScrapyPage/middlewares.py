@@ -10,6 +10,7 @@ from scrapy.http import HtmlResponse
 from selenium import webdriver
 import time
 from selenium.webdriver.chrome.options import Options
+import requests
 
 
 class ScrapypageSpiderMiddleware(object):
@@ -121,9 +122,10 @@ class Login_page(object):
         # 判断是哪个爬虫
         if spider.name == 'scjrm_zszq':
             # 判断是否是登陆
-            # if request.url.find('login') != -1:
+            # if request.url == "http://www.scjrm.com/site/login.html":
+            print("<<<<<<<" +request.url)
             spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
-            spider.driver.get('http://www.scjrm.com/site/login.html')
+            spider.driver.get("http://www.scjrm.com/site/login.html")
             # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
             time.sleep(2)
             #模拟输入账号密码
@@ -134,27 +136,24 @@ class Login_page(object):
             #模拟点击“登录”按钮
             spider.driver.find_element_by_id('sub_bt').click()
             time.sleep(1)
+            spider.driver.get(request.url)
+            time.sleep(3)
             spider.cookies = spider.driver.get_cookies()
             time.sleep(1)
-            spider.driver.get('http://www.scjrm.com/zs/index.html?page=1')
-            time.sleep(3)
             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
                                 body=spider.driver.page_source,  # html源码
                                 encoding='utf-8')
-            #     # 不是登录
+            # 不是登录
             # else:
-            #     # 使用session保存cookie
-            #     session = request.session()
+            #     req = requests.session()  # 会话
             #     for cookie in spider.cookies:
-            #         session.cookies.set(cookie['name'], cookie['value'])
-            #     # 清空头
-            #     session.headers.clear()
-            #     response = session.get(request.url)
-            #     return HtmlResponse(url=response.url,
-            #                         body=response.text,
-            #                         encoding='utf-8')
-
-
+            #         req.cookies.set(cookie['name'], cookie["value"])
+            #     req.headers.clear()  # 清空头
+            #     newpage = req.get(request.url)
+            #     time.sleep(5)
+            #     return HtmlResponse(url=request.url,  # 当前连接
+            #                         body=newpage.text,  # 源代码  # 源代码
+            #                         encoding="utf-8", request=request)  # 返回页面信息
 
         if spider.name == 'scjuchuang_yxzq':
             # 判断是否是登陆

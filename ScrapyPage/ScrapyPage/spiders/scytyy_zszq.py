@@ -9,6 +9,7 @@ class RenrenLoginSpider(scrapy.Spider):
     name = 'scytyy_zszq'
     allowed_domains = ['www.scytyy.net']
     start_urls = ['http://www.scytyy.net/goods-zs.html']
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescytyy_zszq': 300, }}
 
     def start_requests(self):
         # url 来自于 <form method="post" id="loginForm" class="login-form" action="">
@@ -31,7 +32,7 @@ class RenrenLoginSpider(scrapy.Spider):
 
     def parse_profile(self, response):
         # print(response.text)
-        for i in range(1, 5):
+        for i in range(1, 21):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="pro_list1"]/li[%d]/p[2]/a/text()' % i).extract()
@@ -45,8 +46,10 @@ class RenrenLoginSpider(scrapy.Spider):
             item['xq'] = xq
             item['price'] = price
             yield item
-        # next = response.css('body > div:nth-child(8) > div > div.pagers > a:nth-child(11)::attr(href)').extract_first()
-        # url = response.urljoin(next)
-        # yield scrapy.Request(url=url, callback=self.parse)
+        next_page = response.xpath("//*[text()='下一页']/@href").extract_first()
+        if next_page is not None:
+            next_page = response.urljoin(next_page)
+            yield scrapy.Request(next_page, callback=self.parse)
+
 
 

@@ -88,16 +88,18 @@ class MysqlPipelineLongyi_tjzq(object):
                  cj  CHAR(40) NOT NULL,
                  gg CHAR(20) NOT NULL,
                  xq CHAR(20) NOT NULL,
-                 price CHAR(20) NOT NULL )"""
+                 price CHAR(20) NOT NULL,
+                 price2 VARCHAR(20) NOT NULL)
+                 """
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
 
-        insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price,price2) VALUES(%s,%s,%s,%s,%s,%s)
         """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
-                                         item['price']))
+                                         item['price']), item['price2'])
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item

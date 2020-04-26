@@ -71,9 +71,7 @@ import time
 
 
 class MysqlPipelineLongyi_tjzq(object):
-    """
-    同步操作
-    """
+    """龙一医药网_特价专区"""
     now = time.strftime("%Y-%m-%d")
     def __init__(self):
         # 建立连接
@@ -84,20 +82,22 @@ class MysqlPipelineLongyi_tjzq(object):
         # 使用预处理语句创建表
         sql = """CREATE TABLE longyi_tjzq_01 (
                  ID    int unsigned not null  auto_increment primary key,
-                 name  CHAR(20) NOT NULL,
-                 cj  CHAR(40) NOT NULL,
-                 gg CHAR(20) NOT NULL,
-                 xq CHAR(20) NOT NULL,
-                 price CHAR(20) NOT NULL )"""
+                 name  VARCHAR(20) NOT NULL,
+                 cj  VARCHAR(40) NOT NULL,
+                 gg VARCHAR(20) NOT NULL,
+                 xq VARCHAR(20) NOT NULL,
+                 price VARCHAR(20) NOT NULL,
+                 price2 VARCHAR(20) NOT NULL)
+                 """
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
 
-        insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price,price2) VALUES(%s,%s,%s,%s,%s,%s)
         """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
-                                         item['price']))
+                                         item['price'], item['price2']))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item
@@ -108,9 +108,7 @@ class MysqlPipelineLongyi_tjzq(object):
         self.conn.close()
 
 class MysqlPipelinerjyiyao_xpsj(object):
-    """
-    同步操作
-    """
+    """蓉锦医药网_新品上架"""
     now = time.strftime("%Y-%m-%d")
     def __init__(self):
         # 建立连接
@@ -121,11 +119,11 @@ class MysqlPipelinerjyiyao_xpsj(object):
         # 使用预处理语句创建表
         sql = """CREATE TABLE rjyiyao_xpsj (
                  ID    int unsigned not null  auto_increment primary key,
-                 name  CHAR(100) NOT NULL,
-                 cj  CHAR(100) NOT NULL,
-                 gg CHAR(100) NOT NULL,
-                 xq CHAR(100) NOT NULL,
-                 price CHAR(100) NOT NULL )"""
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 xq VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
@@ -144,10 +142,43 @@ class MysqlPipelinerjyiyao_xpsj(object):
         self.cursor.close()
         self.conn.close()
 
+class MysqlPipelinerjyiyao_zkzq(object):
+    """蓉锦医药网_折扣专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS rjyiyao_zkzq")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE rjyiyao_zkzq (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 xq VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into rjyiyao_zkzq (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
+                                         item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
 class MysqlPipelinescjrm_zszq(object):
-    """
-    同步操作
-    """
+    """四川金仁药淘齐_诊所专区"""
     now = time.strftime("%Y-%m-%d")
     def __init__(self):
         # 建立连接
@@ -158,9 +189,9 @@ class MysqlPipelinescjrm_zszq(object):
         # 使用预处理语句创建表
         sql = """CREATE TABLE scjrm_zszq (
                  ID    int unsigned not null  auto_increment primary key,
-                 name  CHAR(100) NOT NULL,
-                 cj  CHAR(100) NOT NULL,
-                 price CHAR(100) NOT NULL )"""
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
@@ -178,3 +209,139 @@ class MysqlPipelinescjrm_zszq(object):
         self.cursor.close()
         self.conn.close()
 
+class MysqlPipelinescjuchuang_yxzq(object):
+    """聚创医药网_院线专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS scjuchuang_yxzq")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE scjuchuang_yxzq (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 xq VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into scjuchuang_yxzq (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
+
+class MysqlPipelinesckxyy_ypzq(object):
+    """科欣医药网_药品专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS sckxyy_ypzq")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE sckxyy_ypzq (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 xq VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into sckxyy_ypzq (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
+class MysqlPipelinescytyy_zszq(object):
+    """粤通医药网_诊所专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS scytyy_zszq")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE scytyy_zszq (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 xq VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into scytyy_zszq (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
+
+class MysqlPipelineysbang_zxxd(object):
+    """粤通医药网_诊所专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS ysbang_zxxd")
+        # 使用预处理语句创建表
+        sql = """CREATE TABLE ysbang_zxxd (
+                 ID    int unsigned not null  auto_increment primary key,
+                 name  VARCHAR(100) NOT NULL,
+                 cj  VARCHAR(100) NOT NULL,
+                 gg VARCHAR(100) NOT NULL,
+                 price VARCHAR(100) NOT NULL )"""
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+
+        insert_sql = """insert into ysbang_zxxd (name,cj,xq,price) VALUES(%s,%s,%s,%s)
+        """
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['xq'], item['price']))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()

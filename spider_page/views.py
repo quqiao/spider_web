@@ -21,18 +21,29 @@ def rjyiyao_xpsj(request):
     users = rjyiyaoxpsj.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'rjyiyao_xpsj.html', {'users': users})
 
+def rjyiyao_zkzq(request):
+    users = rjyiyaoxpsj.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'rjyiyao_zkzq.html', {'users': users})
+
 def scjrm_zszq(request):
     users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'scjrm_zszq.html', {'users': users})
 
+def scjuchuang_yxzq(request):
+    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'scjuchuang_yxzq.html', {'users': users})
 
-def start_rjyiyao_xpsj(request):
-    if request.method == 'POST':
-        # 启动爬虫
-        url = 'http://localhost:6800/schedule.json'
-        data = {'project': 'ScrapyPage', 'spider': 'rjyiyao_xpsj'}
-        print(requests.post(url=url, data=data))
-        return JsonResponse({'result': 'ok'})
+def sckxyy_ypzq(request):
+    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'sckxyy_ypzq.html', {'users': users})
+
+def scytyy_zszq(request):
+    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'scytyy_zszq.html', {'users': users})
+
+def ysbang_zxxd(request):
+    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'ysbang_zxxd.html', {'users': users})
 
 def start_longyi_tjzq(request):
     if request.method == 'POST':
@@ -42,10 +53,58 @@ def start_longyi_tjzq(request):
         print(requests.post(url=url, data=data))
         return JsonResponse({'result': 'ok'})
 
+def start_rjyiyao_xpsj(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'rjyiyao_xpsj'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+def start_rjyiyao_zkzq(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'rjyiyao_zkzq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
 def start_scjrm_zszq(request):
     if request.method == 'POST':
         # 启动爬虫
         url = 'http://localhost:6800/schedule.json'
         data = {'project': 'ScrapyPage', 'spider': 'scjrm_zszq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+def start_scjuchuang_yxzq(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'scjuchuang_yxzq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+def start_sckxyy_ypzq(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'sckxyy_ypzq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+def start_scytyy_zszq(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'scytyy_zszq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+def start_ysbang_zxxd(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'ysbang_zxxd'}
         print(requests.post(url=url, data=data))
         return JsonResponse({'result': 'ok'})

@@ -15,4 +15,5 @@ class CrawlerwebItem(scrapy.Item):
     gg = scrapy.Field()  # 规格
     xq = scrapy.Field()  # 效期
     price = scrapy.Field()  # 价格
+    price2 = scrapy.Field()  # 价格
 

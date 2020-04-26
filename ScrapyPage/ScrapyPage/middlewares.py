@@ -124,7 +124,7 @@ class Login_page(object):
             # 判断是否是登陆
             # if request.url == "http://www.scjrm.com/site/login.html":
             print("<<<<<<<" +request.url)
-            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe", chrome_options=chrome_options)
             spider.driver.get("http://www.scjrm.com/site/login.html")
             # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
             time.sleep(2)
@@ -158,7 +158,7 @@ class Login_page(object):
         if spider.name == 'scjuchuang_yxzq':
             # 判断是否是登陆
             # if request.url.find('login') != -1:
-            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe", chrome_options=chrome_options)
             spider.driver.get('https://www.scjuchuang.com/login')
             # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
             time.sleep(2)
@@ -230,7 +230,7 @@ class Login_page(object):
         elif spider.name == 'sckxyy_ypzq':
             # 判断是否是登陆
             # if request.url.find('login') != -1:
-            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+            spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe", chrome_options=chrome_options)
             spider.driver.get('http://www.sckxyy.com/Login.html')
             time.sleep(2)
             #模拟输入账号密码

@@ -31,7 +31,7 @@ class longyiSpider(scrapy.Spider):
 
     def parse_page(self, response):
         # 为了验证登陆成功，查看药品专区主页
-        request = scrapy.Request(url='http://www.longyiyy.com/events-534.html', callback=self.parse, dont_filter=True)
+        request = scrapy.Request(url='http://www.longyiyy.com/events-542.html', callback=self.parse, dont_filter=True)
         yield request
 
     def parse(self, response):
@@ -44,11 +44,13 @@ class longyiSpider(scrapy.Spider):
             gg = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[3]/span/text()' % i).extract()
             xq = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[6]/text()' % i).extract()
             price = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[7]/span[1]/text()' % i).extract()
+            price2 = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[8]/span[2]/text()' % i).extract()
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg
             item['xq'] = xq
             item['price'] = price
+            item['price2'] = price2
             yield item
         next_page = response.xpath("//*[text()='下一页']/@href").extract_first()
         if next_page is not None:

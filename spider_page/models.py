@@ -11,6 +11,7 @@ class longyitjzq(models.Model):
     gg = models.CharField(max_length=20)
     xq = models.CharField(max_length=20)
     price = models.CharField(max_length=20)
+    price2 = models.CharField(max_length=20)
 
     class Meta:
         managed = True

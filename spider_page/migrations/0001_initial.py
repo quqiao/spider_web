@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('gg', models.CharField(max_length=20)),
                 ('xq', models.CharField(max_length=20)),
                 ('price', models.CharField(max_length=20)),
+                ('price2', models.CharField(max_length=20)),
             ],
             options={
                 'db_table': 'longyi_tjzq_01',

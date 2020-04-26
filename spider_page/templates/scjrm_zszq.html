@@ -3,40 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>金仁药淘齐-诊所专区</title>
+    <meta charset="UTF-8">
+	<meta name="renderer" content="webkit" />
+	<meta http-equiv="X-UA-Compatible" content="IE=webkit">
+	<style type="text/css">
+		.table{background-color: transparent;border-collapse: collapse;border-spacing: 0;border: 1px solid #ddd;}
+		.tableStyles{font-size: 12px;margin-bottom: 10px;}
+		.tableStyles>thead{background-color: #f4f4f4;}
+		.tableStyles>thead>tr>td,.table-bordered>thead>tr>th{border-bottom-width: 1px;}
+		.tableStyles>thead>tr>th,.tableStyles>tbody>tr>td{padding: 5px;line-height: normal;text-align: center;vertical-align: middle;color: #999;box-sizing: border-box;border: 1px solid #e6e6e6;}
+		.tableStyles>tbody>tr{height: 68px;}
+		.tableStyles>tbody>tr>td{color: #333;}
+		.tableStyles>tbody>tr:hover{background-color: rgba(227,233,239,.5); }
+		.tableStyles>tbody>tr>td:hover{background: #6AACF1;color: #fff!important; font-size: 12px; box-sizing: border-box; border: none;padding: 0;cursor: pointer;}
+		.tableStyles>tbody>tr>td:hover .color11,.tableStyles>tbody>tr>td:hover .color21{color: #fff;}
+	</style>
 </head>
 <body>
-<table class="table2excel">
+    <h3>导出金仁药淘齐-诊所专区爬取数据</h3>
+<!--	<p>1.只在谷歌/火狐下起作用，保留单元格合并的效果,下载之后的命名是:xxx.xls</p>-->
+	<a id="dlink"  style="display:none;"></a>
+	<input type="button" onclick="tableToExcel('tables', 'name', 'myfile.xls')" value="Export to Excel">
 
+<table class="table tableStyles" id="tables">
+    <caption>爬取数据统计表</caption><!--可以生成表格的标题-->
     <thead>
     <tr>
+        <td>ID</td>
         <th>药名</th>
         <th>厂家</th>
-        <th>价格</th>
+        <th>规格</th>
+        <th>效期</th>
+        <th>活动价格</th>
+        <th>券后价</th>
     </tr>
     </thead>
     <tbody>
     {% for user in users%}
     <tr>
+        <td>{{user.ID}}</td>
         <td>{{user.name}}</td>
         <td>{{user.cj}}</td>
+        <td>{{user.gg}}</td>
+        <td>{{user.xq}}</td>
         <td>{{user.price}}</td>
+        <td>{{user.price2}}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-<script type="text/javascript" src="../js/jquery.table2excel.js">
-    function table2Excel(filename){
-            $(".table2excel").table2excel({
-                    exclude: ".noExl",//class="noExl"的列不导出
-                    name: "Excel Document Name",
-                    filename: filename,//文件名称
-                    fileext: ".xls",//文件后缀名
-                    exclude_img: true,//导出图片
-                    exclude_links: true,//导出超链接
-                    exclude_inputs: true//导出输入框内容
-                    });
-                    }
-</script>
-<input type="button" value="导出到excel中" class="btn btn-primary" onclick="table2Excel('longyi_tjzq.xls')"/>
+<script type="text/javascript">
+		var tableToExcel = (function () {
+	        var uri = 'data:application/vnd.ms-excel;base64,',
+	        	template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+	        	base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) },
+	        	format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) };
+	        return function (table, name, filename) {
+	            if (!table.nodeType) table = document.getElementById(table)
+	            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+	            document.getElementById("dlink").href = uri + base64(format(template, ctx));
+	            document.getElementById("dlink").download = filename;
+	            document.getElementById("dlink").click();
+	        }
+	    })()
+	</script>
 </body>
 </html>

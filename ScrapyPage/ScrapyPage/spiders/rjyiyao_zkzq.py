@@ -11,7 +11,7 @@ class rjyiyaoSpider(scrapy.Spider):
     name = 'rjyiyao_zkzq'
     allowed_domains = ['rjyiyao']
     start_urls = ['http://new.rjyiyao.com/web/product/sale/3?page=1']
-    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_zkzq': 300}}
 
     # def __init__(self):
     #     super().__init__()

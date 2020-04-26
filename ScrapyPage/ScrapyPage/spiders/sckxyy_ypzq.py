@@ -9,6 +9,7 @@ class RenrenLoginSpider(scrapy.Spider):
     name = 'sckxyy_ypzq'
     allowed_domains = ['sckxyy.com']
     start_urls = ['http://www.sckxyy.com/Drug_zone.html']
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinesckxyy_ypzq': 300, }}
 
     def __init__(self):
         super().__init__()
@@ -16,14 +17,14 @@ class RenrenLoginSpider(scrapy.Spider):
         cookies = None  # 用来保存cookie
 
     def parse(self, response):
-        for i in range(1, 5):
+        for i in range(1, 20):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/h1/span/text()' % i).extract()
             cj = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/section/p[1]/text()' % i).extract()
             gg = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/section/p[2]/text()' % i).extract()
             xq = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/section/div[1]/p[1]/text()' % i).extract()
-            price = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/section/div[2]/p/span/text()' % i).extract()
+            price = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/section/div[2]/p[1]/span/text()' % i).extract()
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg

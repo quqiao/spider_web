@@ -8,8 +8,9 @@ from ScrapyPage.items import CrawlerwebItem
 
 class ExampleLoginSpider(scrapy.Spider):
     name = 'scjuchuang_yxzq'
-    allowed_domains = ['scjrm']
-    start_urls = ['http://www.scjrm.com/zs/index.html']
+    allowed_domains = ['scjuchuang']
+    start_urls = ['https://www.scjuchuang.com/goods?attr=1&page=1']
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_yxzq': 300, }}
 
     def __init__(self):
         super().__init__()
@@ -20,7 +21,7 @@ class ExampleLoginSpider(scrapy.Spider):
     def parse(self, response):
         # print(response.url)
         # print(response.body.decode('utf-8'))
-        for i in range(1, 5):
+        for i in range(1, 16):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[8]/ul/li[%d]/div[3]/text()' % i).extract()

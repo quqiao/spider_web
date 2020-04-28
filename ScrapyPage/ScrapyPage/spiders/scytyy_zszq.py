@@ -5,7 +5,7 @@ import time
 from ScrapyPage.items import CrawlerwebItem
 
 
-class RenrenLoginSpider(scrapy.Spider):
+class scytyySpider(scrapy.Spider):
     name = 'scytyy_zszq'
     allowed_domains = ['www.scytyy.net']
     start_urls = ['http://www.scytyy.net/goods-zs.html']
@@ -32,7 +32,7 @@ class RenrenLoginSpider(scrapy.Spider):
 
     def parse_profile(self, response):
         # print(response.text)
-        for i in range(1, 21):
+        for i in range(1, 5):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="pro_list1"]/li[%d]/p[2]/a/text()' % i).extract()
@@ -48,8 +48,8 @@ class RenrenLoginSpider(scrapy.Spider):
             yield item
         next_page = response.xpath("//*[text()='下一页']/@href").extract_first()
         if next_page is not None:
-            next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
+            next_page1 = response.urljoin(next_page)
+            yield scrapy.Request(next_page1, callback=self.parse_profile)
 
 
 

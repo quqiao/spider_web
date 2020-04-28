@@ -8,10 +8,10 @@ from selenium import webdriver
 from ScrapyPage.items import CrawlerwebItem
 
 class ExampleLoginSpider(scrapy.Spider):
-    name = 'scjuchuang_yxzq'
+    name = 'scjuchuang_tjzq'
     allowed_domains = ['scjuchuang']
-    start_urls = ['https://www.scjuchuang.com/goods?attr=1&page=1']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_yxzq': 300, }}
+    start_urls = ['https://www.scjuchuang.com/newTemplate?theme=2&group_id=1274&isset_cart=&id=54&page=2']
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_yxzq': 300, }}
     headers = {"Host": "www.scjuchuang.com",
                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 
@@ -37,11 +37,11 @@ class ExampleLoginSpider(scrapy.Spider):
 
     # scrapy请求的开始时start_request
     def start_requests(self):
-        for i in range(1, 30):
-            yxzq = 'https://www.scjuchuang.com/goods?attr=1&page=%d' % i
-        # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
-        # 从文件中获取保存的cookies
+        for i in range(1, 22):
+            tjzq = 'https://www.scjuchuang.com/newTemplate?theme=2&group_id=1274&isset_cart=&id=54&page=%d' %i
+            # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
+            # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
+            # 从文件中获取保存的cookies
             with open('scjuchuangCookies.json', 'r', encoding='utf-8') as f:
                 listcookies = json.loads(f.read())  # 获取cookies
             # 把获取的cookies处理成dict类型
@@ -51,25 +51,25 @@ class ExampleLoginSpider(scrapy.Spider):
                 cookies_dict[cookie['name']] = cookie['value']
             print(cookies_dict)
             # Scrapy发起其他页面请求时，带上cookies=cookies_dict即可，同时记得带上header值，
-            yield scrapy.Request(url=yxzq, cookies=cookies_dict, callback=self.parse, headers=self.headers)
-
+            yield scrapy.Request(url=tjzq, cookies=cookies_dict, callback=self.parse, headers=self.headers)
 
     def parse(self, response):
-            for i in range(1, 21):
-                time.sleep(1)
-                item = CrawlerwebItem()
-                name = response.xpath('/html/body/div[8]/ul/li[%d]/div[3]/text()' % i).extract()
-                cj = response.xpath('/html/body/div[8]/ul/li[%d]/p[1]/text()' % i).extract()
-                gg = response.xpath('/html/body/div[8]/ul/li[%d]/p[2]/text()' % i).extract()
-                xq = response.xpath('/html/body/div[8]/ul/li[%d]/p[3]/span[1]/text()' % i).extract()
-                price = response.xpath('/html/body/div[8]/ul/li[%d]/div[1]/p/span[2]/text()' % i).extract()
-                item['name'] = name
-                item['cj'] = cj
-                item['gg'] = gg
-                item['xq'] = xq
-                item['price'] = price
-                yield item
-
+        # print(response.url)
+        # print(response.body.decode('utf-8'))
+        for i in range(1, 21):
+            time.sleep(1)
+            item = CrawlerwebItem()
+            name = response.xpath('/html/body/div[7]/div[4]/div/ul/li[%d]/div[2]/div[1]/div[1]/text()' % i).extract()
+            cj = response.xpath('/html/body/div[7]/div[4]/div/ul/li[%d]/div[2]/div[1]/p[2]/text()' % i).extract()
+            gg = response.xpath('/html/body/div[7]/div[4]/div/ul/li[%d]/div[2]/div[1]/p[3]/span/text()' % i).extract()
+            xq = response.xpath('/html/body/div[7]/div[4]/div/ul/li[%d]/div[2]/div[1]/p[4]/span[1]/text()' % i).extract()
+            price = response.xpath('/html/body/div[7]/div[4]/div/ul/li[%d]/div[2]/div[1]/p[1]/text()' % i).extract()
+            item['name'] = name
+            item['cj'] = cj
+            item['gg'] = gg
+            item['xq'] = xq
+            item['price'] = price
+            yield item
 
 
 

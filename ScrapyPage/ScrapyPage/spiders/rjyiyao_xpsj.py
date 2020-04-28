@@ -4,23 +4,47 @@ import scrapy
 import time
 from ScrapyPage.items import CrawlerwebItem
 from selenium import webdriver
+import json
 from scrapy.http import HtmlResponse
 
 
 class rjyiyaoSpider(scrapy.Spider):
     name = 'rjyiyao_xpsj'
     allowed_domains = ['rjyiyao']
-    start_urls = ['http://new.rjyiyao.com/web/product/group/5']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
+    # start_urls = ['http://new.rjyiyao.com/web/product/group/5']
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
 
-    # def __init__(self):
-    #     super().__init__()
-    #     driver = None  # 实例selenium
-    #     cookies = None  # 用来保存cookie
-    def parse_page(self, response):
-        # 为了验证登陆成功，查看药品专区主页
-        request = scrapy.Request(url='http://new.rjyiyao.com/web/product/group/5', callback=self.parse, dont_filter=True)
-        yield request
+    headers = {"Host": "new.rjyiyao.com",
+               "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
+               }
+
+    def login(self):
+        driver = webdriver.Chrome(
+            executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+        login_url = 'http://new.rjyiyao.com/web/login'
+        driver.get(login_url)
+        username = driver.find_element_by_id('username')
+        password = driver.find_element_by_id('password')
+        username.send_keys('18030535053')
+        password.send_keys('123456')
+        # 模拟点击“登录”按钮
+        driver.find_element_by_id('btnLogin').click()
+        time.sleep(20)
+        # cookies = self.get_cookies()
+        # driver.close()
+        # jsonCookies = json.dumps(cookies)  # 通过json将cookies写入文件
+        # with open('rjyiyaoCookies.json', 'w') as f:
+        #     f.write(jsonCookies)
+        # print(cookies)
+
+    # scrapy请求的开始时start_request
+    def start_requests(self,):
+        self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
+        for i in range(1, 10):
+            xpsj = 'http://new.rjyiyao.com/web/product/group/5?page=%d' % i
+            # driver.get(xpsj)
+            time.sleep(10)
+            yield scrapy.Request(url=xpsj, callback=self.parse)
 
     def parse(self, response):
         for i in range(1, 10):

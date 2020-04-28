@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render, reverse
 import requests
-from django.http import HttpResponse,JsonResponse,HttpResponseRedirect
-from spider_page.models import longyitjzq, rjyiyaoxpsj,scjrmzszq
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from spider_page.models import longyitjzq, rjyiyaoxpsj, rjyiyaozkzq, scjrmzszq, scjuchuangyxzq, sckxyyypzq, scytyyzszq, ysbangzxxd
 
 def index(request):
     return render(request, 'index.html', locals())  # , locals()
@@ -22,7 +22,7 @@ def rjyiyao_xpsj(request):
     return render(request, 'rjyiyao_xpsj.html', {'users': users})
 
 def rjyiyao_zkzq(request):
-    users = rjyiyaoxpsj.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    users = rjyiyaozkzq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'rjyiyao_zkzq.html', {'users': users})
 
 def scjrm_zszq(request):
@@ -30,19 +30,19 @@ def scjrm_zszq(request):
     return render(request, 'scjrm_zszq.html', {'users': users})
 
 def scjuchuang_yxzq(request):
-    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    users = scjuchuangyxzq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'scjuchuang_yxzq.html', {'users': users})
 
 def sckxyy_ypzq(request):
-    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    users = sckxyyypzq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'sckxyy_ypzq.html', {'users': users})
 
 def scytyy_zszq(request):
-    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    users = scytyyzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'scytyy_zszq.html', {'users': users})
 
 def ysbang_zxxd(request):
-    users = scjrmzszq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    users = ysbangzxxd.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
     return render(request, 'ysbang_zxxd.html', {'users': users})
 
 def start_longyi_tjzq(request):

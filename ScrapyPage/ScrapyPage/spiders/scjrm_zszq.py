@@ -14,17 +14,17 @@ class scjrm_zszqSpider(scrapy.Spider):
     allowed_domains = ['www.scjrm.com']
     # start_urls = ["http://www.scjrm.com/site/login.html"]
     # login_url = 'http://www.scjrm.com/site/login.html'
-    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjrm_zszq': 300, }}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjrm_zszq': 300, }}
     # scrapy请求的开始时start_request
     def start_requests(self):
-        for i in range(1, 5):
+        for i in range(1, 11):
             zszq = "http://www.scjrm.com/zs/index.html?page=%d" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 
     def parse(self, response):
         # print(response.url)
         # print(response.body.decode('utf-8'))
-        for i in range(1, 5):
+        for i in range(1, 21):
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[2]/div[2]/div[1]/ul/li[%d]/p[1]/text()' % i).extract()
             cj = response.xpath('/html/body/div[2]/div[2]/div[1]/ul/li[%d]/p[2]/text()' % i).extract()
@@ -33,14 +33,5 @@ class scjrm_zszqSpider(scrapy.Spider):
             item['cj'] = cj
             item['price'] = price
             yield item
-
-
-    # # 方式一：注意execute的参数类型为一个列表
-    # cmdline.execute('scrapy crawl spidername'.split())
-    # # 方式二:注意execute的参数类型为一个列表
-    # cmdline.execute(['scrapy', 'crawl', 'spidername'])
-    # 方式三：execute执行本脚本
-    # now = time.strftime("%Y-%m-%d")
-    # cmdline.execute('scrapy crawl longyi_tjzq -o longyi_tjzq_%s -s FEED_EXPORT_ENCODING=UTF-8' % now)
 
 

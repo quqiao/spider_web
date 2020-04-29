@@ -37,6 +37,7 @@ class ExampleLoginSpider(scrapy.Spider):
 
     # scrapy请求的开始时start_request
     def start_requests(self):
+        # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         for i in range(1, 30):
             yxzq = 'https://www.scjuchuang.com/goods?attr=1&page=%d' % i
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，

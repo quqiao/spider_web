@@ -3,21 +3,19 @@
 import scrapy
 import time
 from ScrapyPage.items import CrawlerwebItem
+import json
+from selenium import webdriver
 
 
-class RenrenLoginSpider(scrapy.Spider):
+class sckxyySpider(scrapy.Spider):
     name = 'sckxyy_ypzq'
     allowed_domains = ['sckxyy.com']
-    start_urls = ['http://www.sckxyy.com/Drug_zone.html']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinesckxyy_ypzq': 300, }}
+    start_urls = ['http://www.sckxyy.com/Login.html', 'http://www.sckxyy.com/Drug_zone.html']
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinesckxyy_ypzq': 300, }}
 
-    def __init__(self):
-        super().__init__()
-        driver = None  # 实例selenium
-        cookies = None  # 用来保存cookie
 
     def parse(self, response):
-        for i in range(1, 20):
+        for i in range(1, 5):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="special-zoneT"]/div[%d]/a/h1/span/text()' % i).extract()

@@ -240,36 +240,36 @@ class Login_page(object):
                                     body=spider.driver.page_source,  # 源代码  # 源代码
                                     encoding="utf-8", request=request)  # 返回页面信息
 
-        elif spider.name == 'sckxyy_ypzq':
-            # 判断是否是登陆
-            # if request.url.find('login') != -1:
-            if request.url == 'http://www.sckxyy.com/Login.html':
-                spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
-                spider.driver.get('http://www.sckxyy.com/Login.html')
-                time.sleep(2)
-                #模拟输入账号密码
-                username = spider.driver.find_element_by_id('usernameLogin')
-                password = spider.driver.find_element_by_id('passwordLogin')
-                username.send_keys('bianyuantianshi')
-                password.send_keys('123456')
-                #模拟点击“登录”按钮
-                spider.driver.find_element_by_id('userLogin').click()
-                time.sleep(1)
-                # spider.cookies = spider.driver.get_cookies()
-                spider.driver.get('http://www.sckxyy.com/Drug_zone.html')
-                return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
-                                    body=spider.driver.page_source,  # html源码
-                                    encoding='utf-8')
-            else:
-                for i in range(10):
-                    time.sleep(2)
-                    js_bottom1 = "var q=document.documentElement.scrollTop=10000"
-                    spider.driver.execute_script(js_bottom1)
-                    time.sleep(1)
-                    spider.driver.find_element_by_class_name("next").click()
-                    return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
-                                    body=spider.driver.page_source,  # html源码
-                                    encoding='utf-8', request=request)
+        # elif spider.name == 'sckxyy_ypzq':
+        #     # 判断是否是登陆
+        #     # if request.url.find('login') != -1:
+        #     if request.url == 'http://www.sckxyy.com/Login.html':
+        #         spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+        #         spider.driver.get('http://www.sckxyy.com/Login.html')
+        #         time.sleep(2)
+        #         #模拟输入账号密码
+        #         username = spider.driver.find_element_by_id('usernameLogin')
+        #         password = spider.driver.find_element_by_id('passwordLogin')
+        #         username.send_keys('bianyuantianshi')
+        #         password.send_keys('123456')
+        #         #模拟点击“登录”按钮
+        #         spider.driver.find_element_by_id('userLogin').click()
+        #         time.sleep(1)
+        #         # spider.cookies = spider.driver.get_cookies()
+        #         spider.driver.get('http://www.sckxyy.com/Drug_zone.html')
+        #         return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+        #                             body=spider.driver.page_source,  # html源码
+        #                             encoding='utf-8')
+        #     else:
+        #         for i in range(10):
+        #             time.sleep(2)
+        #             js_bottom1 = "var q=document.documentElement.scrollTop=10000"
+        #             spider.driver.execute_script(js_bottom1)
+        #             time.sleep(1)
+        #             spider.driver.find_element_by_class_name("next").click()
+        #             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+        #                             body=spider.driver.page_source,  # html源码
+        #                             encoding='utf-8', request=request)
 
         elif spider.name == 'ysbang_zxxd':
             spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")

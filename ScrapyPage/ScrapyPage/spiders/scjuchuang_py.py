@@ -6,12 +6,14 @@ import json
 import time
 from selenium import webdriver
 from ScrapyPage.items import CrawlerwebItem
+import re
+import time
 
 class ExampleLoginSpider(scrapy.Spider):
-    name = 'scjuchuang_yxzq'
+    name = 'scjuchuang_py'
     allowed_domains = ['scjuchuang']
     start_urls = ['https://www.scjuchuang.com/goods?attr=1&page=1']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_yxzq': 300, }}
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_py': 300, }}
     headers = {"Host": "www.scjuchuang.com",
                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 
@@ -38,8 +40,8 @@ class ExampleLoginSpider(scrapy.Spider):
     # scrapy请求的开始时start_request
     def start_requests(self):
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        for i in range(1, 30):
-            yxzq = 'https://www.scjuchuang.com/goods?attr=1&page=%d' % i
+        for i in range(1, 280):
+            yxzq = 'https://www.scjuchuang.com/goods?attr=3&page=%d' % i
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
         # 从文件中获取保存的cookies
@@ -57,18 +59,23 @@ class ExampleLoginSpider(scrapy.Spider):
 
     def parse(self, response):
             for i in range(1, 21):
-                time.sleep(1)
                 item = CrawlerwebItem()
                 name = response.xpath('/html/body/div[8]/ul/li[%d]/div[3]/text()' % i).extract()
                 cj = response.xpath('/html/body/div[8]/ul/li[%d]/p[1]/text()' % i).extract()
                 gg = response.xpath('/html/body/div[8]/ul/li[%d]/p[2]/text()' % i).extract()
                 xq = response.xpath('/html/body/div[8]/ul/li[%d]/p[3]/span[1]/text()' % i).extract()
-                price = response.xpath('/html/body/div[8]/ul/li[%d]/div[1]/p/span[2]/text()' % i).extract()
+                price = response.xpath('/html/body/div[8]/ul/li[%d]/div[2]/text()' % i).extract_first()
+                price_1 = re.findall(r"\d+\.?\d*", price)
+                price2 = response.xpath('/html/body/div[8]/ul/li[%d]/div[2]/span[1]/text()' % i).extract()
+                price3 = response.xpath('/html/body/div[8]/ul/li[%d]/div[1]/p/span[2]/text()' % i).extract()
+
                 item['name'] = name
                 item['cj'] = cj
                 item['gg'] = gg
                 item['xq'] = xq
-                item['price'] = price
+                item['price'] = price_1
+                item['price2'] = price2
+                item['price3'] = price3
                 yield item
 
 

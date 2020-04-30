@@ -12,9 +12,21 @@ class sckxyySpider(scrapy.Spider):
     allowed_domains = ['sckxyy.com']
     start_urls = ['http://www.sckxyy.com/Login.html', 'http://www.sckxyy.com/Drug_zone.html']
     # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinesckxyy_ypzq': 300, }}
+    headers = {'Host': 'www.sckxyy.com',
+               'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
+               }
 
+    def start_requests(self):
+        # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
+        for i in range(1, 3):
+            yxzq = 'http://www.sckxyy.com/goodsGroup_findFifthAnniversaryGoods'
+            data = {
+                'page': "3",
+            }
+            yield scrapy.FormRequest(url=yxzq, method='POST',headers=self.headers, callback=self.parse, dont_filter=True)
 
     def parse(self, response):
+        print("<<<<<<<<" + response.text)
         for i in range(1, 5):
             time.sleep(1)
             item = CrawlerwebItem()

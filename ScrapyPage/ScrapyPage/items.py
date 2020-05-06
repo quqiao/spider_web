@@ -16,5 +16,5 @@ class CrawlerwebItem(scrapy.Item):
     xq = scrapy.Field()  # 效期
     price = scrapy.Field()  # 会员价
     price2 = scrapy.Field()  # 券后价
-    price3 = scrapy.Field()
+    # price3 = scrapy.Field()
 

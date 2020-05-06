@@ -128,6 +128,38 @@ class Login_page(object):
                 spider.driver = webdriver.Chrome(
                     executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
                 # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
+                spider.driver.get("http://www.longyiyy.com/login.html")
+                # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
+                time.sleep(2)
+                #模拟输入账号密码
+                username = spider.driver.find_element_by_name('username')
+                password = spider.driver.find_element_by_name('userpass')
+                username.send_keys('18030535053')
+                password.send_keys('123456')
+                #模拟点击“登录”按钮
+                spider.driver.find_element_by_class_name('is').click()
+                time.sleep(1)
+                spider.driver.get(request.url)
+                time.sleep(3)
+                spider.cookies = spider.driver.get_cookies()
+                time.sleep(1)
+                return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+                                    body=spider.driver.page_source,  # html源码
+                                    encoding='utf-8')
+
+            # 不是登录
+            else:
+                spider.driver.get(request.url)
+                return HtmlResponse(url=spider.driver.current_url,  # 当前连接
+                                    body=spider.driver.page_source,  # 源代码  # 源代码
+                                    encoding="utf-8", request=request)  # 返回页面信息
+
+        if spider.name == 'scjrm_zszq':
+            # 判断是否是登陆
+            if request.url == "http://www.scjrm.com/zs/index.html?page=1":
+                spider.driver = webdriver.Chrome(
+                    executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+                # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
                 spider.driver.get("http://www.scjrm.com/site/login.html")
                 # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
                 time.sleep(2)

@@ -80,7 +80,8 @@ class MysqlPipelineLongyi_tjzq(object):
         self.cursor = self.conn.cursor()
         self.cursor.execute("DROP TABLE IF EXISTS longyi_tjzq_01")
         # 使用预处理语句创建表
-        sql = """CREATE TABLE longyi_tjzq_01 (
+        sql = """
+              CREATE TABLE longyi_tjzq_01 (
                  ID    int unsigned not null  auto_increment primary key,
                  name  VARCHAR(20) NOT NULL,
                  cj  VARCHAR(40) NOT NULL,
@@ -88,13 +89,17 @@ class MysqlPipelineLongyi_tjzq(object):
                  xq VARCHAR(20) NOT NULL,
                  price VARCHAR(20) NOT NULL,
                  price2 VARCHAR(20) NOT NULL)
-                 """
+              """
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
 
-        insert_sql = """insert into longyi_tjzq_01 (name,cj,gg,xq,price,price2) VALUES(%s,%s,%s,%s,%s,%s)
-        """
+        insert_sql = """
+                     insert into longyi_tjzq_01 
+                     (name,cj,gg,xq,price,price2) 
+                     VALUES
+                     (%s,%s,%s,%s,%s,%s)
+                     """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
                                          item['price'], item['price2']))
@@ -255,7 +260,7 @@ class MysqlPipelinesckxyy_ypzq(object):
         self.cursor.execute("DROP TABLE IF EXISTS sckxyy_ypzq")
         # 使用预处理语句创建表
         sql = """CREATE TABLE sckxyy_ypzq (
-                 ID    int unsigned not null  auto_increment primary key,
+                 ID    int unsigned not Null  auto_increment primary key,
                  name  VARCHAR(100) NOT NULL,
                  cj  VARCHAR(100) NOT NULL,
                  gg VARCHAR(100) NOT NULL,

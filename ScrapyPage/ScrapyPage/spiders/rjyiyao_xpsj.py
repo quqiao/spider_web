@@ -12,7 +12,7 @@ class rjyiyaoSpider(scrapy.Spider):
     name = 'rjyiyao_xpsj'
     allowed_domains = ['rjyiyao']
     # start_urls = ['http://new.rjyiyao.com/web/product/group/5']
-    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_xpsj': 300}}
 
     # scrapy请求的开始时start_request
     def start_requests(self):

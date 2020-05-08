@@ -9,6 +9,7 @@ class RenrenLoginSpider(scrapy.Spider):
     name = 'ysbang_zxxd'
     allowed_domains = ['www.ysbang.cn/']
     start_urls = ['https://dian.ysbang.cn/index.html#/indexContent']
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineysbang_zxxd': 300, }}
 
     def start_requests(self):
         # url 来自于 <form method="post" id="loginForm" class="login-form" action="">

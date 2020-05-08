@@ -11,7 +11,7 @@ class longyiSpider(scrapy.Spider):
     name = 'longyi_tjzq'
     allowed_domains = ['longyiyy.com']
     start_urls = ['http://www.longyiyy.com/events-543.html']
-    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,}}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,}}
 
 
     # def parse(self, response):

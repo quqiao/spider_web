@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>四川科欣医药网-药品专区</title>
+    <title>合纵药易购-普药专区专区</title>
     <meta charset="UTF-8">
 	<meta name="renderer" content="webkit" />
 	<meta http-equiv="X-UA-Compatible" content="IE=webkit">
@@ -20,7 +20,7 @@
 	</style>
 </head>
 <body>
-    <h3>导出四川科欣医药网-药品专区爬取数据</h3>
+    <h3>导出龙一医药网_特价专区爬取数据</h3>
 <!--	<p>1.只在谷歌/火狐下起作用，保留单元格合并的效果,下载之后的命名是:xxx.xls</p>-->
 	<a id="dlink"  style="display:none;"></a>
 	<input type="button" onclick="tableToExcel('tables', 'name', 'myfile.xls')" value="Export to Excel">
@@ -34,7 +34,8 @@
         <th>厂家</th>
         <th>规格</th>
         <th>效期</th>
-        <th>会员价</th>
+        <th>活动价格</th>
+
     </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@
         <td>{{user.gg}}</td>
         <td>{{user.xq}}</td>
         <td>{{user.price}}</td>
+
     </tr>
     {% endfor %}
     </tbody>

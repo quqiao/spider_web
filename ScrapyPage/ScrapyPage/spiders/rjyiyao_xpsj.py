@@ -16,7 +16,7 @@ class rjyiyaoSpider(scrapy.Spider):
 
     # scrapy请求的开始时start_request
     def start_requests(self):
-        for i in range(1, 4):
+        for i in range(1, 3):
             zszq = "http://new.rjyiyao.com/web/product/group/5?page=%d" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 

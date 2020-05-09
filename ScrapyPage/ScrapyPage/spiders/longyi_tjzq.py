@@ -36,14 +36,14 @@ class longyiSpider(scrapy.Spider):
     #     yield request
 
     def start_requests(self):
-        for i in range(1, 9):
+        for i in range(1, 3):
             zszq = "http://www.longyiyy.com/events-filter-543-%d-3.html" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 
     def parse(self, response):
         # print(response.text)
         time.sleep(1)
-        for i in range(1, 41):
+        for i in range(1, 3):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()

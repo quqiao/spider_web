@@ -6,15 +6,22 @@
 </head>
 <body>
         <p>********************龙一医药网***********************</p>
-        <form action="{% url 'reg2' %}" method="POST">
+        <form action="{% url 'reg1_1' %}" method="POST">
         {% csrf_token %}
             <input type="submit" value="爬取龙一医药网_特价专区">
         </form>
         <a href="./longyi_tjzq/">
-            <button>获取龙一医药网数据</button>
+            <button>获取特价专区数据</button>
+        </a>
+        <form action="{% url 'reg1_2' %}" method="POST">
+        {% csrf_token %}
+            <input type="submit" value="爬取龙一医药网_特价专区">
+        </form>
+        <a href="./longyi_yp/">
+            <button>获取药品专区数据</button>
         </a>
         <p>*********************蓉锦医药网**********************</p>
-        <form action="{% url 'reg1' %}" method="POST">
+        <form action="{% url 'reg2_1' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取蓉锦医药网_新品上架">
         </form>
@@ -22,7 +29,7 @@
             <button>获取蓉锦医药网_新品上架数据</button>
         </a>
         <p>*******************************************</p>
-        <form action="{% url 'reg3' %}" method="POST">
+        <form action="{% url 'reg2_2' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取蓉锦医药网_折扣专区">
         </form>
@@ -30,7 +37,7 @@
             <button>获取蓉锦医药网_折扣专区数据</button>
         </a>
         <p>**********************金仁药淘齐*********************</p>
-        <form action="{% url 'reg4' %}" method="POST">
+        <form action="{% url 'reg3_1' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取金仁药淘齐_诊所专区">
         </form>
@@ -38,7 +45,21 @@
             <button>获取金仁药淘齐_诊所专区数据</button>
         </a>
         <p>***********************四川聚创医药网********************</p>
-        <form action="{% url 'reg5' %}" method="POST">
+        <form action="{% url 'reg4_1' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="爬取四川聚创_普药专区">
+        </form>
+        <a href="./scjuchuang_py/">
+            <button>获取四川聚创_普药专区数据</button>
+        </a>
+        <form action="{% url 'reg4_2' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="爬取四川聚创_特价专区">
+        </form>
+        <a href="./scjuchuang_tjzq/">
+            <button>获取四川聚创_特价专区数据</button>
+        </a>
+        <form action="{% url 'reg4_3' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取四川聚创_院线专区">
         </form>
@@ -46,7 +67,7 @@
             <button>获取四川聚创_院线专区数据</button>
         </a>
         <p>***********************四川科欣医药网********************</p>
-        <form action="{% url 'reg6' %}" method="POST">
+        <form action="{% url 'reg5_1' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取四川科欣医药_药品专区">
         </form>
@@ -54,20 +75,35 @@
             <button>获取四川科欣医药_药品专区数据</button>
         </a>
         <p>************************四川粤通医药网*******************</p>
-        <form action="{% url 'reg7' %}" method="POST">
+        <form action="{% url 'reg6_1' %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="爬取四川粤通医药_药品专区">
+        <input type="submit" value="爬取四川粤通医药_特价专区">
+        </form>
+        <a href="./scytyy_tjzq/">
+            <button>获取四川粤通医药_特价专区数据</button>
+        </a>
+        <form action="{% url 'reg6_2' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="爬取四川粤通医药_诊所专区">
         </form>
         <a href="./scytyy_zszq/">
-            <button>获取四川粤通医药_药品专区数据</button>
+            <button>获取四川粤通医药_诊所专区数据</button>
         </a>
         <p>************************药师帮*******************</p>
-        <form action="{% url 'reg8' %}" method="POST">
+        <form action="{% url 'reg7_1' %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="爬取药师帮_在线下单">
         </form>
         <a href="./ysbang_zxxd/">
             <button>获取药师帮_在线下单数据</button>
+        </a>
+        <p>************************合纵药易购*******************</p>
+        <form action="{% url 'reg8_1' %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="合纵药易购_普药专区">
+        </form>
+        <a href="./hezongyy_py/">
+            <button>获取合纵药易购_普药专区数据</button>
         </a>
 </body>
 </html>

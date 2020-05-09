@@ -349,10 +349,10 @@ class Login_page(object):
             ran.crop(box).save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/02.png")
 
             # 4、获取验证码图片，读取验证码
-            imageCode = Image.open("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/02.png")  # 图像增强，二值化
-            # imageCode.load()
+            imageCode = Image.open("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/test01.jpg")  # 图像增强，二值化
+            imageCode.load()
             sharp_img = ImageEnhance.Contrast(imageCode).enhance(2.0)
-            sharp_img.save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/03.png")
+            sharp_img.save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/test01.jpg")
             sharp_img.load()  # 对比度增强
             time.sleep(2)
             print(sharp_img)

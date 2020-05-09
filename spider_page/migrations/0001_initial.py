@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('price2', models.CharField(max_length=20)),
             ],
             options={
-                'db_table': 'longyi_tjzq_01',
+                'db_table': 'longyi_tjzq',
                 'managed': True,
             },
         ),

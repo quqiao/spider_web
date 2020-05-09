@@ -10,7 +10,7 @@ from selenium import webdriver
 class sckxyySpider(scrapy.Spider):
     name = 'sckxyy_ypzq'
     allowed_domains = ['sckxyy.com']
-    start_urls = ['http://www.sckxyy.com/Login.html']
+    start_urls = ['http://www.sckxyy.com/Login.html', 'http://www.sckxyy.com/Drug_zone.html']
     custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinesckxyy_ypzq': 300, }}
     headers = {'Host': 'www.sckxyy.com',
                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
@@ -37,7 +37,7 @@ class sckxyySpider(scrapy.Spider):
 
     def start_requests(self):
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        for i in range(1,3):
+        for i in range(1, 3):
             yxzq = 'http://www.sckxyy.com/goodsGroup_findFifthAnniversaryGoods'
             data = {
                 'page': '%d' % i,
@@ -55,15 +55,15 @@ class sckxyySpider(scrapy.Spider):
 
     def parse(self, response):
         print("<<<<<<<<" + response.text)
-        res = response.text
-        for i in range(1, 3):
+        res = json.loads(response.text)
+        for i in range(1, 10):
             time.sleep(1)
             item = CrawlerwebItem()
-            name = res[1]['name']
-            cj = res[1]['production']
-            gg = res[1]['norms']
-            xq = res[1]['exp']
-            price = res[1]['wholesale']
+            name = res[int(i)]['name']
+            cj = res[int(i)]['production']
+            gg = res[int(i)]['norms']
+            xq = res[int(i)]['exp']
+            price = res[int(i)]['wholesale']
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg

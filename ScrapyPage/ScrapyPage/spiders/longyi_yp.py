@@ -9,7 +9,7 @@ class longyiSpider(scrapy.Spider):
     name = 'longyi_yp'
     allowed_domains = ['www.longyiyy.com/']
     start_urls = ['http://www.longyiyy.com/goods.html']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinelongyi_yp': 300, }}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_yp': 300, }}
 
     # def parse(self, response):
     def start_requests(self):

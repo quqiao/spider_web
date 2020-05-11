@@ -14,12 +14,12 @@ class rjyiyaoSpider(scrapy.Spider):
     custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinerjyiyao_zkzq': 300}}
 
     def start_requests(self):
-        for i in range(1, 4):
+        for i in range(1, 3):
             zszq = "http://new.rjyiyao.com/web/product/sale/3?page=%d" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 
     def parse(self, response):
-        for i in range(1, 41):
+        for i in range(1, 6):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="pageContent"]/div/div[%d]/h1/text()' % i).extract()

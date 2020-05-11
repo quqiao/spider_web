@@ -10,7 +10,7 @@ import time
 class longyiSpider(scrapy.Spider):
     name = 'longyi_tjzq'
     allowed_domains = ['longyiyy.com']
-    start_urls = ['http://www.longyiyy.com/events-543.html']
+    start_urls = ['http://www.longyiyy.com/events-547.html']
     custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,}}
 
 
@@ -36,14 +36,14 @@ class longyiSpider(scrapy.Spider):
     #     yield request
 
     def start_requests(self):
-        for i in range(1, 3):
-            zszq = "http://www.longyiyy.com/events-filter-543-%d-3.html" % i
+        for i in range(1, 10):
+            zszq = "http://www.longyiyy.com/events-filter-547-%d-3.html" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 
     def parse(self, response):
         # print(response.text)
         time.sleep(1)
-        for i in range(1, 3):
+        for i in range(1, 41):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()
@@ -51,13 +51,13 @@ class longyiSpider(scrapy.Spider):
             gg = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[3]/span/text()' % i).extract()
             xq = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[6]/text()' % i).extract()
             price = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[7]/span[1]/text()' % i).extract()
-            price2 = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[8]/span[2]/text()' % i).extract()
+            # price2 = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[8]/span[2]/text()' % i).extract()
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg
             item['xq'] = xq
             item['price'] = price
-            item['price2'] = price2
+            # item['price2'] = price2
             yield item
         # next_page = response.xpath("//*[text()='下一页']/@href").extract_first()
         # if next_page is not None:

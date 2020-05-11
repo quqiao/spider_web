@@ -41,7 +41,7 @@ class sckxyySpider(scrapy.Spider):
 
     def parse(self, response):
         # print("<<<<<<<<" + response.text)
-        for i in range(1, 11):
+        for i in range(1, 5):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/ul/li[%d]/p[2]/a/text()' % i).extract()

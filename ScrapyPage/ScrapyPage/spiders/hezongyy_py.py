@@ -23,7 +23,7 @@ class ExampleLoginSpider(scrapy.Spider):
 
     def parse(self, response):
         # print(response.text)
-        for i in range(1, 3):
+        for i in range(1, 4):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.css('#datu > div > ul > li:nth-child(%d) > div.datu-mingzi::text' % i).extract()
@@ -31,11 +31,13 @@ class ExampleLoginSpider(scrapy.Spider):
             gg = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[5]/span/text()' % i).extract()
             xq = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[6]/span[1]/text()' % i).extract()
             price = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[2]/text()' % i).extract()
+            price2 = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[12]/text()' % i).extract()
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg
             item['xq'] = xq
             item['price'] = price
+            item['price2'] = price2
             yield item
 
 

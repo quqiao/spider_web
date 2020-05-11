@@ -154,9 +154,9 @@ class Login_page(object):
                                     body=spider.driver.page_source,  # 源代码  # 源代码
                                     encoding="utf-8", request=request)  # 返回页面信息
 
-        if spider.name == 'scjrm_zszq':
+        if spider.name == 'longyi_tjzq':
             # 判断是否是登陆
-            if request.url == "http://www.scjrm.com/zs/index.html?page=1":
+            if request.url == "http://www.longyiyy.com/events-filter-547-1-3.html":
                 spider.driver = webdriver.Chrome(
                     executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
                 # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
@@ -304,10 +304,42 @@ class Login_page(object):
                                     body=spider.driver.page_source,  # 源代码  # 源代码
                                     encoding="utf-8", request=request)  # 返回页面信息
 
+        if spider.name == 'scytyy_zszq':
+            # 判断是否是登陆
+            # if request.url.find('login') != -1:
+            if request.url == "http://www.scytyy.net/goods-zs-filter-0-0-0-0-0-0-0-1-1-1,.html":
+                spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+                spider.driver.get('http://www.scytyy.net/login.html')
+                # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
+                time.sleep(1)
+                #模拟输入账号密码
+                username = spider.driver.find_element_by_name('username')
+                password = spider.driver.find_element_by_name('userpass')
+                username.send_keys('18030535053')
+                password.send_keys('123456')
+                #模拟点击“登录”按钮
+                spider.driver.find_element_by_class_name('is').click()
+                time.sleep(2)
+                spider.driver.get(request.url)
+                # spider.driver.find_element_by_xpath('/html/body/div[5]/div[2]/div[3]/div[2]/a[2]/img').click()  # 新品上架
+                # windows = spider.driver.window_handles
+                # spider.driver.switch_to.window(windows[1])  # 切换到第二页
+                time.sleep(5)
+                spider.cookies = spider.driver.get_cookies()
+                return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+                                    body=spider.driver.page_source,  # html源码
+                                    encoding='utf-8')
+            else:
+                spider.driver.get(request.url)
+                time.sleep(5)
+                return HtmlResponse(url=spider.driver.current_url,  # 当前连接
+                                    body=spider.driver.page_source,  # 源代码  # 源代码
+                                    encoding="utf-8", request=request)  # 返回页面信息
+
         # elif spider.name == 'sckxyy_ypzq':
         #     # 判断是否是登陆
         #     # if request.url.find('login') != -1:
-        #     if request.url == 'http://www.sckxyy.com/Login.html':
+        #     if request.url == 'http://www.sckxyy.com/goodsGroup_findFifthAnniversaryGoods':
         #         spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
         #         spider.driver.get('http://www.sckxyy.com/Login.html')
         #         time.sleep(2)
@@ -325,15 +357,11 @@ class Login_page(object):
         #                             body=spider.driver.page_source,  # html源码
         #                             encoding='utf-8')
         #     else:
-        #         for i in range(10):
-        #             time.sleep(2)
-        #             js_bottom1 = "var q=document.documentElement.scrollTop=10000"
-        #             spider.driver.execute_script(js_bottom1)
-        #             time.sleep(1)
-        #             spider.driver.find_element_by_class_name("next").click()
-        #             return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
-        #                             body=spider.driver.page_source,  # html源码
-        #                             encoding='utf-8', request=request)
+        #         spider.driver.get(request.url)
+        #         time.sleep(5)
+        #         return HtmlResponse(url=spider.driver.current_url,  # 当前连接
+        #                             body=spider.driver.page_source,  # 源代码  # 源代码
+        #                             encoding="utf-8", request=request)  # 返回页面信息
 
         elif spider.name == 'ysbang_zxxd':
             spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
@@ -353,10 +381,10 @@ class Login_page(object):
             ran.crop(box).save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/02.png")
 
             # 4、获取验证码图片，读取验证码
-            imageCode = Image.open("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/02.png")  # 图像增强，二值化
-            # imageCode.load()
+            imageCode = Image.open("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/test01.jpg")  # 图像增强，二值化
+            imageCode.load()
             sharp_img = ImageEnhance.Contrast(imageCode).enhance(2.0)
-            sharp_img.save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/03.png")
+            sharp_img.save("F://django/spider_web/ScrapyPage/ScrapyPage/yzm/test01.jpg")
             sharp_img.load()  # 对比度增强
             time.sleep(2)
             print(sharp_img)

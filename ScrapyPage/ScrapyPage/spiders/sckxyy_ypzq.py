@@ -36,7 +36,7 @@ class sckxyySpider(scrapy.Spider):
         print(cookies)
 
     def start_requests(self):
-        # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
+        self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         for i in range(1, 3):
             yxzq = 'http://www.sckxyy.com/goodsGroup_findFifthAnniversaryGoods'
             data = {

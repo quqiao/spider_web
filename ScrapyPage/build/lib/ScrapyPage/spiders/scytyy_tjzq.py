@@ -31,7 +31,7 @@ class sckxyySpider(scrapy.Spider):
 
     def parse_page(self, response):
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        for i in range(1, 22):
+        for i in range(1, 3):
             yxzq = 'http://www.scytyy.net/activitypage2.php'
             data = {
                 'page': '%d' % i,
@@ -41,7 +41,7 @@ class sckxyySpider(scrapy.Spider):
 
     def parse(self, response):
         # print("<<<<<<<<" + response.text)
-        for i in range(1, 21):
+        for i in range(1, 11):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/ul/li[%d]/p[2]/a/text()' % i).extract()

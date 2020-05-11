@@ -79,13 +79,13 @@ class MysqlPipelinehezongyy_py(object):
         # 使用预处理语句创建表
         sql = """
               CREATE TABLE hezongyy_py (
-                 ID    int unsigned not null  auto_increment primary key,
-                 name  VARCHAR(100),
-                 cj  VARCHAR(100),
+                 ID int unsigned auto_increment primary key,
+                 name VARCHAR(100),
+                 cj VARCHAR(100),
                  gg VARCHAR(100),
                  xq VARCHAR(100),
                  price VARCHAR(100),
-                 price2 VARCHAR(100),
+                 price2 VARCHAR(100) DEFAULT 'Shanghai',
                  price3 VARCHAR(100))
               """
         self.cursor.execute(sql)
@@ -94,13 +94,12 @@ class MysqlPipelinehezongyy_py(object):
 
         insert_sql = """
                      insert into hezongyy_py 
-                     (name,cj,gg,xq,price) 
+                     (name,cj,gg,xq,price,price2) 
                      VALUES
-                     (%s,%s,%s,%s,%s)
+                     (%s,%s,%s,%s,%s,%s)
                      """
         # 执行插入数据到数据库操作
-        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
-                                         item['price']))
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], str(item['xq']), item['price'], str(item['price2'])))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item
@@ -123,7 +122,7 @@ class MysqlPipelineLongyi_tjzq(object):
         # 使用预处理语句创建表
         sql = """
               CREATE TABLE longyi_tjzq(
-                 ID    int unsigned NOT NULL  auto_increment primary key,
+                 ID    int unsigned NOT NULL auto_increment primary key,
                  name  VARCHAR(100),
                  cj  VARCHAR(100),
                  gg VARCHAR(100),
@@ -138,13 +137,13 @@ class MysqlPipelineLongyi_tjzq(object):
 
         insert_sql = """
                      insert into longyi_tjzq
-                     (name,cj,gg,xq,price,price2) 
+                     (name,cj,gg,xq,price) 
                      VALUES
-                     (%s,%s,%s,%s,%s,%s)
+                     (%s,%s,%s,%s,%s)
                      """
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
-                                         item['price'], item['price2']))
+                                         item['price']))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item
@@ -215,13 +214,12 @@ class MysqlPipelinerjyiyao_xpsj(object):
                  xq VARCHAR(100),
                  price VARCHAR(100),
                  price2 VARCHAR(100),
-                 price3 VARCHAR(100)"""
+                 price3 VARCHAR(100))"""
         self.cursor.execute(sql)
 
     def process_item(self, item, spider):
 
-        insert_sql = """insert into rjyiyao_xpsj (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)
-        """
+        insert_sql = """insert into rjyiyao_xpsj (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)"""
         # 执行插入数据到数据库操作
         self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'],
                                          item['price']))
@@ -333,7 +331,7 @@ class MysqlPipelinescjuchuang_py(object):
     def process_item(self, item, spider):
         insert_sql = """insert into scjuchuang_py (name,cj,gg,xq,price,price2,price3) VALUES(%s,%s,%s,%s,%s,%s,%s)"""
         # 执行插入数据到数据库操作
-        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], item['price'], item['price2'], item['price3']))
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], str(item['price']), str(item['price2']), str(item['price3'])))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item
@@ -369,7 +367,7 @@ class MysqlPipelinescjuchuang_tjzq(object):
     def process_item(self, item, spider):
         insert_sql = """insert into scjuchuang_tjzq (name,cj,gg,xq,price) VALUES(%s,%s,%s,%s,%s)"""
         # 执行插入数据到数据库操作
-        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], item['price']))
+        self.cursor.execute(insert_sql, (str(item['name']), str(item['cj']), str(item['gg']), str(item['xq']), str(item['price'])))
         # 提交，不进行提交无法保存到数据库
         self.conn.commit()
         return item

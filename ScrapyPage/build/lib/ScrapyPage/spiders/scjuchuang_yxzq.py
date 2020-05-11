@@ -38,7 +38,7 @@ class ExampleLoginSpider(scrapy.Spider):
     # scrapy请求的开始时start_request
     def start_requests(self):
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        for i in range(1, 21):
+        for i in range(1, 3):
             yxzq = 'https://www.scjuchuang.com/goods?attr=1&page=%d' % i
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
@@ -56,7 +56,7 @@ class ExampleLoginSpider(scrapy.Spider):
 
 
     def parse(self, response):
-            for i in range(1, 21):
+            for i in range(1, 9):
                 time.sleep(1)
                 item = CrawlerwebItem()
                 name = response.xpath('/html/body/div[8]/ul/li[%d]/div[3]/text()' % i).extract()

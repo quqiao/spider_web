@@ -37,9 +37,9 @@ class ExampleLoginSpider(scrapy.Spider):
 
     # scrapy请求的开始时start_request
     def start_requests(self):
+        # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         for i in range(1, 3):
-            tjzq = 'https://www.scjuchuang.com/newTemplate?theme=2&group_id=1274&isset_cart=&id=54&page=%d' %i
-            # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
+            tjzq = 'https://www.scjuchuang.com/newTemplate?theme=2&group_id=1335&isset_cart=&id=60&page=%d' % i
             # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
             # 从文件中获取保存的cookies
             with open('scjuchuangCookies.json', 'r', encoding='utf-8') as f:

@@ -9,7 +9,7 @@ class longyiSpider(scrapy.Spider):
     name = 'longyi_yp'
     allowed_domains = ['www.longyiyy.com/']
     start_urls = ['http://www.longyiyy.com/goods.html']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinelongyi_yp': 300, }}
+    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_yp': 300, }}
 
     # def parse(self, response):
     def start_requests(self):
@@ -33,7 +33,7 @@ class longyiSpider(scrapy.Spider):
 
     def parse_profile(self, response):
         # print(response.text)
-        for i in range(1, 21):
+        for i in range(1, 4):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('//*[@id="pro_list1"]/li[%d]/p[1]/a/text()' % i).extract()
@@ -47,10 +47,10 @@ class longyiSpider(scrapy.Spider):
             item['xq'] = xq
             item['price'] = price
             yield item
-        next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
-        if next_page is not None:
-            next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
+        # next_page = response.xpath('/html/body/div[4]/div/div[5]/a[11]/@href').extract_first()
+        # if next_page is not None:
+        #     next_page = response.urljoin(next_page)
+        #     yield scrapy.Request(next_page, callback=self.parse)
 
     # # 方式一：注意execute的参数类型为一个列表
     # cmdline.execute('scrapy crawl spidername'.split())

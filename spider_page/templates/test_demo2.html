@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子页面</title>
+</head>
+<body>
+
+<!--这是一段注释。extends继承basepage.html页面-->
+{% extends "test_demo.html" %}
+
+{% block content %}
+    <p>这里是content块的填充内容</p>
+{% endblock content %}
+
+{% block ad %}
+<ul>自动化内容</ul>
+    {% for i in ads %}
+    <li>{{i}}</li>
+     {% endfor %}
+{% endblock ad %}
+
+</body>
+</html>

@@ -168,3 +168,13 @@ def start_ysbang_zxxd(request):
         data = {'project': 'ScrapyPage', 'spider': 'ysbang_zxxd'}
         print(requests.post(url=url, data=data))
         return JsonResponse({'result': 'ok'})
+
+
+def test_demo(request):
+    context = {'name': ['哈登', '保罗', '维斯布鲁克']}
+    return render(request, 'test_demo.html', context)
+
+def test_demo2(request):
+    context = {"ads": ["selenium", "appium", "requests"]
+               }
+    return render(request, 'test_demo2.html', context)

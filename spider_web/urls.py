@@ -51,4 +51,6 @@ urlpatterns = [
     url(r"hezongyy", views.start_hezongyy_py, name="reg8_1"),
     # url('^', views.start_rjyiyao_xpsj),
     # url('^', views.start_longyi_tjzq),
+    path("test_demo/", views.test_demo),
+    path("test_demo2/", views.test_demo2),
 ]

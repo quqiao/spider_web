@@ -3,107 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <title>爬取</title>
+
 </head>
 <body>
-        <p>********************龙一医药网***********************</p>
-        <form action="{% url 'reg1_1' %}" method="POST">
-        {% csrf_token %}
-            <input type="submit" value="爬取龙一医药网_特价专区">
-        </form>
-        <a href="./longyi_tjzq/">
-            <button>获取特价专区数据</button>
-        </a>
-        <form action="{% url 'reg1_2' %}" method="POST">
-        {% csrf_token %}
-            <input type="submit" value="爬取龙一医药网_特价专区">
-        </form>
-        <a href="./longyi_yp/">
-            <button>获取药品专区数据</button>
-        </a>
-        <p>*********************蓉锦医药网**********************</p>
-        <form action="{% url 'reg2_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取蓉锦医药网_新品上架">
-        </form>
-        <a href="./rjyiyao_xpsj/">
-            <button>获取蓉锦医药网_新品上架数据</button>
-        </a>
-        <p>*******************************************</p>
-        <form action="{% url 'reg2_2' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取蓉锦医药网_折扣专区">
-        </form>
-        <a href="./rjyiyao_zkzq/">
-            <button>获取蓉锦医药网_折扣专区数据</button>
-        </a>
-        <p>**********************金仁药淘齐*********************</p>
-        <form action="{% url 'reg3_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取金仁药淘齐_诊所专区">
-        </form>
-        <a href="./scjrm_zszq/">
-            <button>获取金仁药淘齐_诊所专区数据</button>
-        </a>
-        <p>***********************四川聚创医药网********************</p>
-        <form action="{% url 'reg4_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川聚创_普药专区">
-        </form>
-        <a href="./scjuchuang_py/">
-            <button>获取四川聚创_普药专区数据</button>
-        </a>
-        <form action="{% url 'reg4_2' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川聚创_特价专区">
-        </form>
-        <a href="./scjuchuang_tjzq/">
-            <button>获取四川聚创_特价专区数据</button>
-        </a>
-        <form action="{% url 'reg4_3' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川聚创_院线专区">
-        </form>
-        <a href="./scjuchuang_yxzq/">
-            <button>获取四川聚创_院线专区数据</button>
-        </a>
-        <p>***********************四川科欣医药网********************</p>
-        <form action="{% url 'reg5_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川科欣医药_药品专区">
-        </form>
-        <a href="./sckxyy_ypzq/">
-            <button>获取四川科欣医药_药品专区数据</button>
-        </a>
-        <p>************************四川粤通医药网*******************</p>
-        <form action="{% url 'reg6_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川粤通医药_特价专区">
-        </form>
-        <a href="./scytyy_tjzq/">
-            <button>获取四川粤通医药_特价专区数据</button>
-        </a>
-        <form action="{% url 'reg6_2' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取四川粤通医药_诊所专区">
-        </form>
-        <a href="./scytyy_zszq/">
-            <button>获取四川粤通医药_诊所专区数据</button>
-        </a>
-        <p>************************药师帮*******************</p>
-        <form action="{% url 'reg7_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="爬取药师帮_在线下单">
-        </form>
-        <a href="./ysbang_zxxd/">
-            <button>获取药师帮_在线下单数据</button>
-        </a>
-        <p>************************合纵药易购*******************</p>
-        <form action="{% url 'reg8_1' %}" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="合纵药易购_普药专区">
-        </form>
-        <a href="./hezongyy_py/">
-            <button>获取合纵药易购_普药专区数据</button>
-        </a>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;
+margin-right:10px; margin-bottom:10px" >
+                <p style="text-align: center"><font size="6">龙一医药网</font></p>
+                <ul>
+                        <li>特价专区:</li>
+                </ul>
+
+                        <form action="{% url 'reg1_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./longyi_tjzq/" style="float:left">
+                                <input type="submit" value="获取数据">
+                        </a>
+
+                <ul>
+                        <li style="clear:both;">药品专区:</li>
+                </ul>
+                        <form action="{% url 'reg1_2' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./longyi_yp/">
+                                <button>获取数据</button>
+                        </a>
+        </div>
+
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;margin-right:10px;" >
+        <p style="text-align: center"><font size="6">蓉锦医药网</font></p>
+        <ul>
+                <li>新品上架:</li>
+        </ul>
+                <form action="{% url 'reg2_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                </form>
+                <a href="./rjyiyao_xpsj/">
+                    <button>获取数据</button>
+                </a>
+                <ul>
+                <li>折扣专区:</li>
+                </ul>
+                        <form action="{% url 'reg2_2' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./rjyiyao_zkzq/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;margin-right:10px;" >
+                <p style="text-align: center"><font size="6">金仁药淘齐</font></p>
+                <ul>
+                <li>诊所专区:</li>
+                </ul>
+                        <form action="{% url 'reg3_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./scjrm_zszq/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;" >
+                <p style="text-align: center"><font size="6">四川聚创医药网</font></p>
+                <ul>
+                <li>普药专区:</li>
+                </ul>
+                        <form action="{% url 'reg4_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./scjuchuang_py/">
+                            <button>获取数据</button>
+                        </a>
+                <ul>
+                <li>特价专区:</li>
+                </ul>
+                        <form action="{% url 'reg4_2' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./scjuchuang_tjzq/">
+                            <button>获取数据</button>
+                        </a>
+                <ul>
+                <li>院线专区:</li>
+                </ul>
+                        <form action="{% url 'reg4_3' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./scjuchuang_yxzq/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;clear:both;float:left;margin-right:10px;margin-bottom:10px;" >
+        <p style="text-align: center"><font size="6">四川科欣医药网</font></p>
+                <ul>
+                <li>药品专区:</li>
+                </ul>
+                <form action="{% url 'reg5_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                </form>
+                <a href="./sckxyy_ypzq/">
+                    <button>获取数据</button>
+                </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;margin-right:10px;" >
+        <p style="text-align: center"><font size="6">四川粤通医药网</font></p>
+                <ul>
+                <li>特价专区:</li>
+                </ul>
+                        <form action="{% url 'reg6_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                                </form>
+                        <a href="./scytyy_tjzq/">
+                            <button>获取数据</button>
+                        </a>
+                <ul>
+                <li>诊所专区:</li>
+                </ul>
+                        <form action="{% url 'reg6_2' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./scytyy_zszq/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;margin-right:10px;" >
+                <p style="text-align: center"><font size="6">药师帮</font></p>
+                <ul>
+                <li>在线下单:</li>
+                </ul>
+                        <form action="{% url 'reg7_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                        {% csrf_token %}
+                        <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./ysbang_zxxd/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
+        <div style="box-shadow: 10px 10px 5px #888888;width:400px;height:400px;background-color:white;float:left;" >
+                <p style="text-align: center"><font size="6">合纵药易购</font></p>
+                <ul>
+                <li>普药专区:</li>
+                </ul>
+                        <form action="{% url 'reg8_1' %}" method="POST" style="float:left; margin-left:30px; margin-right:30px;">
+                                {% csrf_token %}
+                                <input type="submit" value="爬取数据">
+                        </form>
+                        <a href="./hezongyy_py/">
+                            <button>获取数据</button>
+                        </a>
+        </div>
 </body>
 </html>

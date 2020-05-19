@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'spider_page'
 ]
 
+LOGIN_URL = '/accounts/login/'  #这个路径需要根据你网站的实际登陆地址来设置
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

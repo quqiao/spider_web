@@ -6,13 +6,12 @@ import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from spider_page.models import longyitjzq, rjyiyaoxpsj, rjyiyaozkzq, \
                                scjrmzszq, scjuchuangyxzq, sckxyyypzq, scytyyzszq, \
-                                ysbangzxxd,hezongyypy,scjuchuangtjzq,scjuchuangpy, longyiyp,scytyytjzq
+                                ysbangzxxd,hezongyypy,scjuchuangtjzq,scjuchuangpy, longyiyp,scytyytjzq,User
+from django.contrib.auth.decorators import login_required
 
+@login_required()
 def index(request):
-    return render(request, 'index.html', locals())  # , locals()
-
-def page(request):
-    return render(request, 'page.html')
+    return render(request, 'index.html')  #, locals()
 
 """合纵药易购——普药专区"""
 def hezongyy_py(request):
@@ -178,3 +177,23 @@ def test_demo2(request):
     context = {"ads": ["selenium", "appium", "requests"]
                }
     return render(request, 'test_demo2.html', context)
+
+def login(request):
+    '''登录页面'''
+    if request.method == "GET":
+        return render(request, 'login.html')
+        # request.session['login_from'] = request.META.get('HTTP_REFERER', '/')
+
+    if request.method == "POST":
+        # 先查询数据库是否有此用户名
+        username = request.POST.get('username')
+        psw = request.POST.get('password')
+        # 查询用户名和密码
+        user_obj = User.objects.filter(user_name=username).first()
+        if user_obj:
+            return render(request, "index.html")
+            # return redirect('/demo')
+            # return HttpResponse('登陆成功')
+            # return HttpResponseRedirect(request.session['login_from'])
+        else:
+            return HttpResponse('用户名或密码错误')

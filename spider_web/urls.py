@@ -20,8 +20,9 @@ from spider_page import views
 from . import longyi_tjzq_db
 
 urlpatterns = [
-    url('^$', views.index),
-    url('^page$', views.page),
+    url(r'^accounts/login/', views.login),
+    url(r'^admin/', admin.site.urls),
+    url('^index/', views.index),
     # url(r'^longyi_tjzq$', longyi_tjzq_db.slec_all),
     url(r'^rjyiyao_xpsj/', views.rjyiyao_xpsj),
     url(r'^rjyiyao_zkzq/', views.rjyiyao_zkzq),
@@ -53,4 +54,5 @@ urlpatterns = [
     # url('^', views.start_longyi_tjzq),
     path("test_demo/", views.test_demo),
     path("test_demo2/", views.test_demo2),
+
 ]

@@ -1,8 +1,17 @@
 from django.db import models
 
-from django.db import models
+"""后台管理系统数据创建"""
+class Person(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
 
-# Create your models here.
+# 新增一张用户表，表名为user 字段user_name, psw ,mail 都是字符串类型
+class User(models.Model):
+    user_name = models.CharField(max_length=100, primary_key=True)   # 设置为主键
+    psw = models.CharField(max_length=100)
+    mail = models.CharField(max_length=100)
+
+"""爬虫各页面数据创建"""
 class hezongyypy(models.Model):
     ID = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100)

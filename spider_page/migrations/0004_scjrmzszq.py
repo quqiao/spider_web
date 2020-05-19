@@ -16,7 +16,11 @@ class Migration(migrations.Migration):
                 ('ID', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=20)),
                 ('cj', models.CharField(max_length=40)),
+                ('gg', models.CharField(max_length=20)),
+                ('xq', models.CharField(max_length=20)),
                 ('price', models.CharField(max_length=20)),
+                ('price2', models.CharField(max_length=20)),
+                ('price3', models.CharField(max_length=20)),
             ],
             options={
                 'db_table': 'scjrm_zszq',

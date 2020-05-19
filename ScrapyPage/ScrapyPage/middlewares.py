@@ -156,7 +156,7 @@ class Login_page(object):
 
         if spider.name == 'longyi_tjzq':
             # 判断是否是登陆
-            if request.url == "http://www.longyiyy.com/events-filter-547-1-3.html":
+            if request.url == "http://www.longyiyy.com/events-filter-554-1-3.html":
                 spider.driver = webdriver.Chrome(
                     executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
                 # if request.url == "http://www.scjrm.com/zs/index.html?page=1":

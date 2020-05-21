@@ -9,21 +9,56 @@ from spider_page.models import longyitjzq, rjyiyaoxpsj, rjyiyaozkzq, \
                                 ysbangzxxd,hezongyypy,scjuchuangtjzq,scjuchuangpy, longyiyp,scytyytjzq,User
 from django.contrib.auth.decorators import login_required
 
-@login_required()
+@login_required
 def index(request):
     return render(request, 'index.html')  #, locals()
 
 """合纵药易购——普药专区"""
-def hezongyy_py(request):
-    users = hezongyypy.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
-    return render(request, 'hezongyy_py.html', {'users': users})
+
+
 def start_hezongyy_py(request):
     if request.method == 'POST':
         # 启动爬虫
         url = 'http://localhost:6800/schedule.json'
         data = {'project': 'ScrapyPage', 'spider': 'hezongyy_py'}
-        print(requests.post(url=url, data=data))
-        return JsonResponse({'result': 'ok'})
+        startjob = requests.post(url=url, data=data).text
+        global jobid
+        jobid = eval(startjob)["jobid"]
+        url2 = 'http://127.0.0.1:6800/listjobs.json?project=ScrapyPage'
+        listjobs = requests.get(url=url2).text
+        print(listjobs)
+        listjobs1 = eval(listjobs)["running"]
+        print(listjobs1)
+        list1 = []
+        for i in range(len(listjobs1)):
+            list1.append(listjobs1[i]["id"])
+        if jobid in list1:
+            return JsonResponse({'result': 'ok'})
+        else:
+            return JsonResponse({'result': 'fail'})
+
+def hezongyy_py(request):
+    url2 = 'http://127.0.0.1:6800/listjobs.json?project=ScrapyPage'
+    listjobs = requests.get(url=url2).text
+    print(listjobs)
+    listjobs1 = eval(listjobs)["running"]
+    print(listjobs1)
+    list1 = []
+    for i in range(len(listjobs1)):
+        list1.append(listjobs1[i]["id"])
+    listjobs2 = eval(listjobs)["finished"]
+    print(listjobs2)
+    list2 = []
+    for i in range(len(listjobs2)):
+        list2.append(listjobs2[i]["id"])
+    try:
+        if jobid in list1:
+            return JsonResponse({'result': 'reading'})
+        if jobid in list2:
+            users = hezongyypy.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+            return render(request, 'hezongyy_py.html', {'users': users})
+    except NameError:
+        return JsonResponse({'result': '还未执行'}, json_dumps_params={'ensure_ascii':False})
 
 """龙一医药网——特价专区"""
 def longyi_tjzq(request):

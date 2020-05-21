@@ -10,7 +10,7 @@ import time
 class longyiSpider(scrapy.Spider):
     name = 'longyi_tjzq'
     allowed_domains = ['longyiyy.com']
-    start_urls = ['http://www.longyiyy.com/events-547.html']
+    start_urls = ['http://www.longyiyy.com/events-554.html']
     custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelineLongyi_tjzq': 300,}}
 
 
@@ -36,14 +36,14 @@ class longyiSpider(scrapy.Spider):
     #     yield request
 
     def start_requests(self):
-        for i in range(1, 10):
-            zszq = "http://www.longyiyy.com/events-filter-547-%d-3.html" % i
+        for i in range(1, 7):
+            zszq = "http://www.longyiyy.com/events-filter-554-%d-3.html" % i
             yield scrapy.Request(url=zszq, callback=self.parse)
 
     def parse(self, response):
         # print(response.text)
         time.sleep(1)
-        for i in range(1, 41):
+        for i in range(1, 21):
             time.sleep(1)
             item = CrawlerwebItem()
             name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()

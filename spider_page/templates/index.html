@@ -17,7 +17,7 @@ margin-right:10px; margin-bottom:10px" >
                                 {% csrf_token %}
                                 <input type="submit" value="爬取数据">
                         </form>
-                        <a href="./longyi_tjzq/" style="float:left">
+                        <a href="{% url 'reg1_1_1' %}" style="float:left">
                                 <input type="submit" value="获取数据">
                         </a>
 
@@ -28,7 +28,7 @@ margin-right:10px; margin-bottom:10px" >
                                 {% csrf_token %}
                                 <input type="submit" value="爬取数据">
                         </form>
-                        <a href="./longyi_yp/">
+                        <a href="./accounts/login/longyi_yp/">
                                 <button>获取数据</button>
                         </a>
         </div>
@@ -160,7 +160,7 @@ margin-right:10px; margin-bottom:10px" >
                                 {% csrf_token %}
                                 <input type="submit" value="爬取数据">
                         </form>
-                        <a href="./hezongyy_py/">
+                        <a href="{% url 'reg8_1_1' %}">
                             <button>获取数据</button>
                         </a>
         </div>

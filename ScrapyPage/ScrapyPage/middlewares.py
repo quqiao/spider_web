@@ -13,6 +13,7 @@ from selenium.webdriver.chrome.options import Options
 import requests
 import pytesseract
 from PIL import Image, ImageEnhance
+import unittest
 
 
 class ScrapypageSpiderMiddleware(object):
@@ -111,6 +112,7 @@ class ScrapypageDownloaderMiddleware(object):
 
 class Login_page(object):
     # type()元类，object 基类
+
     def process_request(self,  request, spider):
         chrome_options = Options()
         chrome_options.add_argument('--headless')  # 使用无头谷歌浏览器模式
@@ -150,6 +152,7 @@ class Login_page(object):
             else:
                 spider.driver.get(request.url)
                 time.sleep(2)
+                spider.driver.quit()
                 return HtmlResponse(url=spider.driver.current_url,  # 当前连接
                                     body=spider.driver.page_source,  # 源代码  # 源代码
                                     encoding="utf-8", request=request)  # 返回页面信息

@@ -38,27 +38,29 @@ def start_hezongyy_py(request):
             return JsonResponse({'result': 'fail'})
 
 def hezongyy_py(request):
-    url2 = 'http://127.0.0.1:6800/listjobs.json?project=ScrapyPage'
-    listjobs = requests.get(url=url2).text
-    print(listjobs)
-    listjobs1 = eval(listjobs)["running"]
-    print(listjobs1)
-    list1 = []
-    for i in range(len(listjobs1)):
-        list1.append(listjobs1[i]["id"])
-    listjobs2 = eval(listjobs)["finished"]
-    print(listjobs2)
-    list2 = []
-    for i in range(len(listjobs2)):
-        list2.append(listjobs2[i]["id"])
     try:
+        url2 = 'http://127.0.0.1:6800/listjobs.json?project=ScrapyPage'
+        listjobs = requests.get(url=url2).text
+        print(listjobs)
+        listjobs1 = eval(listjobs)["running"]
+        print(listjobs1)
+        list1 = []
+        for i in range(len(listjobs1)):
+            list1.append(listjobs1[i]["id"])
+        listjobs2 = eval(listjobs)["finished"]
+        print(listjobs2)
+        list2 = []
+        for i in range(len(listjobs2)):
+            list2.append(listjobs2[i]["id"])
         if jobid in list1:
-            return JsonResponse({'result': 'reading'})
+            return JsonResponse({'result': 'reading'}, json_dumps_params={'ensure_ascii':False})
         if jobid in list2:
             users = hezongyypy.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
             return render(request, 'hezongyy_py.html', {'users': users})
     except NameError:
-        return JsonResponse({'result': '还未执行'}, json_dumps_params={'ensure_ascii':False})
+        return JsonResponse({'result': '爬虫还未启动'}, json_dumps_params={'ensure_ascii':False})
+    except:
+        return JsonResponse({'result': '爬虫服务器还未启动，请联系管理员'}, json_dumps_params={'ensure_ascii':False})
 
 """龙一医药网——特价专区"""
 def longyi_tjzq(request):

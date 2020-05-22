@@ -17,7 +17,7 @@ class ExampleLoginSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for i in range(1, 3):
+        for i in range(1, 4):
             url_py = "https://www.hezongyy.com/puyao.html?order=DESC&pageNumber=%d" % i
             yield scrapy.Request(url=url_py, callback=self.parse)
 
@@ -30,8 +30,8 @@ class ExampleLoginSpider(scrapy.Spider):
             cj = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[4]/text()' % i).extract()
             gg = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[5]/span/text()' % i).extract()
             xq = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[6]/span[1]/text()' % i).extract()
-            price = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[2]/text()' % i).extract()
-            price2 = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[12]/text()' % i).extract()
+            price = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[2]/div[1]/text()' % i).extract()
+            price2 = response.xpath('//*[@id="datu"]/div/ul/li[%d]/div[2]/div[2]/text()' % i).extract()
             item['name'] = name
             item['cj'] = cj
             item['gg'] = gg

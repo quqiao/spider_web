@@ -124,38 +124,42 @@ class Login_page(object):
         :return:
         '''
         # 判断是哪个爬虫
+        # try:
         if spider.name == 'hezongyy_py':
             # 判断是否是登陆
-            if request.url == "https://www.hezongyy.com/puyao.html?order=DESC&pageNumber=1":
-                spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
-                # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
-                spider.driver.get("https://www.hezongyy.com/auth/login")
-                # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
-                time.sleep(2)
-                #模拟输入账号密码
-                username = spider.driver.find_element_by_name('user_name')
-                password = spider.driver.find_element_by_name('password')
-                username.send_keys('测试05')
-                password.send_keys('123456')
-                #模拟点击“登录”按钮
-                spider.driver.find_element_by_class_name('login').click()
-                time.sleep(1)
-                spider.driver.get(request.url)
-                time.sleep(3)
-                spider.cookies = spider.driver.get_cookies()
-                time.sleep(1)
-                return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
-                                    body=spider.driver.page_source,  # html源码
+                if request.url == "https://www.hezongyy.com/puyao.html?order=DESC&pageNumber=1":
+                    spider.driver = webdriver.Chrome(
+                        executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+                    # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
+                    spider.driver.get("https://www.hezongyy.com/auth/login")
+                    # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
+                    time.sleep(2)
+                    #模拟输入账号密码
+                    username = spider.driver.find_element_by_name('user_name')
+                    password = spider.driver.find_element_by_name('password')
+                    username.send_keys('测试05')
+                    password.send_keys('123456')
+                    #模拟点击“登录”按钮
+                    spider.driver.find_element_by_class_name('login').click()
+                    time.sleep(1)
+                    spider.driver.get(request.url)
+                    time.sleep(3)
+                    spider.cookies = spider.driver.get_cookies()
+                    time.sleep(1)
+                    return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+                                        body=spider.driver.page_source,  # html源码
                                     encoding='utf-8')
+                    # 不是登录
+                else:
+                    spider.driver.get(request.url)
+                    time.sleep(2)
+                    return HtmlResponse(encoding="utf-8",
+                                        url=spider.driver.current_url,
+                                        body=spider.driver.page_source)
+        # finally:
+        #     spider.driver.quit()
 
-            # 不是登录
-            else:
-                spider.driver.get(request.url)
-                time.sleep(2)
-                spider.driver.quit()
-                return HtmlResponse(url=spider.driver.current_url,  # 当前连接
-                                    body=spider.driver.page_source,  # 源代码  # 源代码
-                                    encoding="utf-8", request=request)  # 返回页面信息
+
 
         if spider.name == 'longyi_tjzq':
             # 判断是否是登陆
@@ -221,27 +225,37 @@ class Login_page(object):
                                     body=spider.driver.page_source,  # 源代码  # 源代码
                                     encoding="utf-8", request=request)  # 返回页面信息
 
-        # if spider.name == 'scjuchuang_yxzq':
-        #     # 判断是否是登陆
-        #     # if request.url.find('login') != -1:
-        #     spider.driver = webdriver.Chrome(executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe", chrome_options=chrome_options)
-        #     spider.driver.get('https://www.scjuchuang.com/login')
-        #     # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
-        #     time.sleep(2)
-        #     #模拟输入账号密码
-        #     username = spider.driver.find_element_by_class_name('loginName')
-        #     password = spider.driver.find_element_by_class_name('loginPassword')
-        #     username.send_keys('yczs123')
-        #     password.send_keys('123456')
-        #     #模拟点击“登录”按钮
-        #     spider.driver.find_element_by_class_name('loginBtn').click()
-        #     time.sleep(1)
-        #     spider.driver.get('https://www.scjuchuang.com/goods?attr=1&page=1')
-        #     # spider.driver.find_element_by_link_text('院线专区').click()
-        #     spider.cookies = spider.driver.get_cookies()
-        #     return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
-        #                         body=spider.driver.page_source,  # html源码
-        #                         encoding='utf-8')
+        if spider.name == 'scjuchuang_jtj':
+            # 判断是否是登陆
+            if request.url == "https://www.scjuchuang.com/activeGroup?group_id=1382&sing=&page=1":
+                spider.driver = webdriver.Chrome(
+                    executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
+                # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
+                spider.driver.get("https://www.scjuchuang.com/login")
+                # spider.driver.find_element_by_xpath('/html/body/div[3]/div/div/div[2]/div/h3/a').click()
+                time.sleep(2)
+                # 模拟输入账号密码
+                username = spider.driver.find_element_by_class_name('loginName')
+                password = spider.driver.find_element_by_class_name('loginPassword')
+                username.send_keys('yczs123')
+                password.send_keys('123456')
+                # 模拟点击“登录”按钮
+                spider.driver.find_element_by_class_name('loginBtn').click()
+                time.sleep(1)
+                spider.driver.get(request.url)
+                time.sleep(3)
+                spider.cookies = spider.driver.get_cookies()
+                time.sleep(1)
+                return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
+                                    body=spider.driver.page_source,  # html源码
+                                    encoding='utf-8')
+
+            # 不是登录
+            else:
+                spider.driver.get(request.url)
+                return HtmlResponse(url=spider.driver.current_url,  # 当前连接
+                                    body=spider.driver.page_source,  # 源代码  # 源代码
+                                    encoding="utf-8", request=request)  # 返回页面信息
 
         elif spider.name == 'rjyiyao_xpsj':
             # 判断是否是登陆

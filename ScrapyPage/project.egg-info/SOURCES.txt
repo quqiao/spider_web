@@ -16,6 +16,7 @@ ScrapyPage/spiders/longyi_yp.py
 ScrapyPage/spiders/rjyiyao_xpsj.py
 ScrapyPage/spiders/rjyiyao_zkzq.py
 ScrapyPage/spiders/scjrm_zszq.py
+ScrapyPage/spiders/scjuchuang_jtj.py
 ScrapyPage/spiders/scjuchuang_py.py
 ScrapyPage/spiders/scjuchuang_tjzq.py
 ScrapyPage/spiders/scjuchuang_yxzq.py

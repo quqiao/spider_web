@@ -6,7 +6,7 @@ import requests
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from spider_page.models import longyitjzq, rjyiyaoxpsj, rjyiyaozkzq, \
                                scjrmzszq, scjuchuangyxzq, sckxyyypzq, scytyyzszq, \
-                                ysbangzxxd,hezongyypy,scjuchuangtjzq,scjuchuangpy, longyiyp,scytyytjzq,User
+                                ysbangzxxd,hezongyypy,scjuchuangtjzq,scjuchuangpy, longyiyp,scytyytjzq,User,scjuchuangjtj
 from django.contrib.auth.decorators import login_required
 
 @login_required
@@ -14,8 +14,6 @@ def index(request):
     return render(request, 'index.html')  #, locals()
 
 """合纵药易购——普药专区"""
-
-
 def start_hezongyy_py(request):
     if request.method == 'POST':
         # 启动爬虫
@@ -33,9 +31,9 @@ def start_hezongyy_py(request):
         for i in range(len(listjobs1)):
             list1.append(listjobs1[i]["id"])
         if jobid in list1:
-            return JsonResponse({'result': 'ok'})
+            return JsonResponse({'result': '爬虫启动成功'}, json_dumps_params={'ensure_ascii':False})
         else:
-            return JsonResponse({'result': 'fail'})
+            return JsonResponse({'result': '爬虫启动失败'}, json_dumps_params={'ensure_ascii':False})
 
 def hezongyy_py(request):
     try:
@@ -53,7 +51,7 @@ def hezongyy_py(request):
         for i in range(len(listjobs2)):
             list2.append(listjobs2[i]["id"])
         if jobid in list1:
-            return JsonResponse({'result': 'reading'}, json_dumps_params={'ensure_ascii':False})
+            return JsonResponse({'result': '正在爬取中，请不要重复操作'}, json_dumps_params={'ensure_ascii':False})
         if jobid in list2:
             users = hezongyypy.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
             return render(request, 'hezongyy_py.html', {'users': users})
@@ -118,6 +116,18 @@ def start_scjrm_zszq(request):
         # 启动爬虫
         url = 'http://localhost:6800/schedule.json'
         data = {'project': 'ScrapyPage', 'spider': 'scjrm_zszq'}
+        print(requests.post(url=url, data=data))
+        return JsonResponse({'result': 'ok'})
+
+"""四川聚创医药网——阶梯价"""
+def scjuchuang_jtj(request):
+    users = scjuchuangjtj.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+    return render(request, 'scjuchuang_py.html', {'users': users})
+def start_scjuchuang_jtj(request):
+    if request.method == 'POST':
+        # 启动爬虫
+        url = 'http://localhost:6800/schedule.json'
+        data = {'project': 'ScrapyPage', 'spider': 'scjuchuang_jtj'}
         print(requests.post(url=url, data=data))
         return JsonResponse({'result': 'ok'})
 

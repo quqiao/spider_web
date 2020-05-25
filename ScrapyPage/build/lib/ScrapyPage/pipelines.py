@@ -305,8 +305,44 @@ class MysqlPipelinescjrm_zszq(object):
         self.cursor.close()
         self.conn.close()
 
+class MysqlPipelinescjuchuang_jtj(object):
+    """聚创医药网_普药专区"""
+    now = time.strftime("%Y-%m-%d")
+    def __init__(self):
+        # 建立连接
+        self.conn = pymysql.connect('localhost', 'root', '123456', 'spider_web')  # 有中文要存入数据库的话要加charset='utf8'
+        # 创建游标
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("DROP TABLE IF EXISTS scjuchuang_jtj")
+        # 使用预处理语句创建表
+        sql = """
+                 CREATE TABLE scjuchuang_jtj (
+                 ID    int unsigned NOT NULL  auto_increment primary key,
+                 name  VARCHAR(100),
+                 cj  VARCHAR(100),
+                 gg VARCHAR(100),
+                 xq VARCHAR(100),
+                 price VARCHAR(100),
+                 price2 VARCHAR(100),
+                 price3 VARCHAR(100))
+              """
+        self.cursor.execute(sql)
+
+    def process_item(self, item, spider):
+        insert_sql = """insert into scjuchuang_jtj (name,cj,gg,xq,price,price2,price3) VALUES(%s,%s,%s,%s,%s,%s,%s)"""
+        # 执行插入数据到数据库操作
+        self.cursor.execute(insert_sql, (item['name'], item['cj'], item['gg'], item['xq'], str(item['price']), str(item['price2']), str(item['price3'])))
+        # 提交，不进行提交无法保存到数据库
+        self.conn.commit()
+        return item
+
+    def close_spider(self, spider):
+        # 关闭游标和连接
+        self.cursor.close()
+        self.conn.close()
+
 class MysqlPipelinescjuchuang_py(object):
-    """聚创医药网_院线专区"""
+    """聚创医药网_普药专区"""
     now = time.strftime("%Y-%m-%d")
     def __init__(self):
         # 建立连接
@@ -342,7 +378,7 @@ class MysqlPipelinescjuchuang_py(object):
         self.conn.close()
 
 class MysqlPipelinescjuchuang_tjzq(object):
-    """聚创医药网_院线专区"""
+    """聚创医药网_特价专区"""
     now = time.strftime("%Y-%m-%d")
     def __init__(self):
         # 建立连接

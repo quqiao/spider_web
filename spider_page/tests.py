@@ -50,9 +50,13 @@ import requests
 # print(listjobs)
 # listjobs1 = eval(listjobs)["running"]
 # print(listjobs1)
-def test1():
-    global a
-    a = 1
-test = test1()
-def test2():
-    print(test.a)
+# def test1():
+#     global a
+#     a = 1
+# test = test1()
+# def test2():
+#     print(test.a)
+
+url = "http://192.168.31.221:6800/logs/ScrapyPage/hezongyy_py/19a5d98a9e5011ea89df40b0769e5174.log"
+res = requests.request(url=url)
+print(res.text)

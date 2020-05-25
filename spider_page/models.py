@@ -93,6 +93,20 @@ class scjrmzszq(models.Model):
         managed = True
         db_table = 'scjrm_zszq'
 
+class scjuchuangjtj(models.Model):
+    ID = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    name = models.CharField(max_length=100)
+    cj = models.CharField(max_length=100)
+    gg = models.CharField(max_length=100)
+    xq = models.CharField(max_length=100)
+    price = models.CharField(max_length=100)
+    price2 = models.CharField(max_length=100)
+    price3 = models.CharField(max_length=100)
+
+    class Meta:
+        managed = True
+        db_table = 'scjuchuang_jtj'
+
 class scjuchuangpy(models.Model):
     ID = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100)

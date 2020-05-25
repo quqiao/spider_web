@@ -17,7 +17,7 @@ class ExampleLoginSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        for i in range(1, 4):
+        for i in range(1, 6):
             url_py = "https://www.hezongyy.com/puyao.html?order=DESC&pageNumber=%d" % i
             yield scrapy.Request(url=url_py, callback=self.parse)
 

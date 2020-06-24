@@ -97,8 +97,8 @@ def longyi_tjzq(request):
         res = requests.request(method="get", url=url3)
         res1 = res.text
         if "Spider closed" in res1:
-            users = hezongyypy.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
-            return render(request, 'hezongyy_py.html', {'users': users})
+            users = longyitjzq.objects.all()  # 将User表中的所有对象赋值给users这个变量，它是一个列表
+            return render(request, 'longyi_tjzq.html', {'users': users})
         else:
             return JsonResponse({'result': '正在爬取中，请不要重复操作'}, json_dumps_params={'ensure_ascii': False})
 

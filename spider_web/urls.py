@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('^index/', views.index),
     # url(r'^longyi_tjzq$', longyi_tjzq_db.slec_all),
-
     url(r'^longyi_tjzq/', views.longyi_tjzq, name="reg1_1_1"),
     url(r'^longyi_yp/', views.longyi_yp, name="reg1_1_2"),
     url(r'^rjyiyao_xpsj/', views.rjyiyao_xpsj, name="reg2_1_1"),

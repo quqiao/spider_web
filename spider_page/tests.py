@@ -57,10 +57,12 @@ import requests
 # def test2():
 #     print(test.a)
 
-url = "http://192.168.31.221:6800/logs/ScrapyPage/hezongyy_py/abea720a9eea11ea928f40b0769e5174.log"
-res = requests.request(method="get", url=url)
-print(res.text)
-if "Spider closed" in res.text:
-    print("pass")
-else:
-    print("fail")
+# url = "http://192.168.31.221:6800/logs/ScrapyPage/hezongyy_py/abea720a9eea11ea928f40b0769e5174.log"
+# res = requests.request(method="get", url=url)
+# print(res.text)
+# if "Spider closed" in res.text:
+#     print("pass")
+# else:
+#     print("fail")
+for i in range(1, 6):
+    print(i)

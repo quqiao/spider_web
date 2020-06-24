@@ -159,7 +159,7 @@ class Login_page(object):
 
         if spider.name == 'longyi_tjzq':
             # 判断是否是登陆
-            if request.url == "http://www.longyiyy.com/events-filter-555-1-1.html":
+            if request.url == "http://www.longyiyy.com/events-filter-559-1-1.html":
                 spider.driver = webdriver.Chrome(
                     executable_path="C:/Users/Administrator/AppData/Local/Google/Chrome/Application/chromedriver.exe")
                 # if request.url == "http://www.scjrm.com/zs/index.html?page=1":
@@ -181,7 +181,7 @@ class Login_page(object):
                 return HtmlResponse(url=spider.driver.current_url,  # 登录后的url
                                     body=spider.driver.page_source,  # html源码
                                     encoding='utf-8')
-            elif request.url == "http://www.longyiyy.com/events-filter-555-15-1.html":
+            elif request.url == "http://www.longyiyy.com/events-filter-559-7-1.html":
                 spider.driver.quit()
 
             # 不是登录

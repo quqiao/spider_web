@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""聚创医药网_院线专区"""
+"""聚创医药网_普药专区"""
 import scrapy
 from scrapy import FormRequest,Request
 import json
@@ -13,7 +13,7 @@ class ExampleLoginSpider(scrapy.Spider):
     name = 'scjuchuang_py'
     allowed_domains = ['scjuchuang']
     start_urls = ['https://www.scjuchuang.com/goods?attr=1&page=1']
-    custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_py': 300, }}
+    # custom_settings = {'ITEM_PIPELINES': {'ScrapyPage.pipelines.MysqlPipelinescjuchuang_py': 300, }}
     headers = {"Host": "www.scjuchuang.com",
                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36"
 
@@ -25,8 +25,8 @@ class ExampleLoginSpider(scrapy.Spider):
         driver.get(login_url)
         username = driver.find_element_by_class_name('loginName')
         password = driver.find_element_by_class_name('loginPassword')
-        username.send_keys('yczs123')
-        password.send_keys('123456')
+        username.send_keys('15281084407')
+        password.send_keys('a123456')
         # 模拟点击“登录”按钮
         driver.find_element_by_class_name('loginBtn').click()
         time.sleep(5)
@@ -40,7 +40,7 @@ class ExampleLoginSpider(scrapy.Spider):
     # scrapy请求的开始时start_request
     def start_requests(self):
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
-        for i in range(1, 3):
+        for i in range(1, 347):
             yxzq = 'https://www.scjuchuang.com/goods?attr=3&page=%d' % i
         # self.login()  # 首次使用，先执行login，保存cookies之后便可以注释，
         # 毕竟每次执行都要登录还是挺麻烦的，我们要充分利用cookies的作用
@@ -58,12 +58,12 @@ class ExampleLoginSpider(scrapy.Spider):
 
 
     def parse(self, response):
-            for i in range(1, 8):
+            for i in range(1, 21):
                 item = CrawlerwebItem()
-                name = response.xpath('/html/body/div[8]/ul/li[%d]/div[3]/text()' % i).extract()
-                cj = response.xpath('/html/body/div[8]/ul/li[%d]/p[1]/text()' % i).extract()
-                gg = response.xpath('/html/body/div[8]/ul/li[%d]/p[2]/text()' % i).extract()
-                xq = response.xpath('/html/body/div[8]/ul/li[%d]/p[3]/span[1]/text()' % i).extract()
+                name = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[1]/a/text()' % i).extract()
+                cj = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[2]/text()' % i).extract()
+                gg = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[3]/span/text()' % i).extract()
+                xq = response.xpath('/html/body/div[4]/div/div[4]/ul/li[%d]/p[6]/text()' % i).extract()
                 price = response.xpath('/html/body/div[8]/ul/li[%d]/div[2]/text()' % i).extract_first()
                 price_1 = re.findall(r"\d+\.?\d*", price)
                 price2 = response.xpath('/html/body/div[8]/ul/li[%d]/div[2]/span[1]/text()' % i).extract()

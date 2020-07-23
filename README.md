@@ -1,4 +1,4 @@
-# DjangoAndScrapy
+# spider_web
 
 Django + scrapy的爬虫项目
 
